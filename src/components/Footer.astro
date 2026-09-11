@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/brand/logo.jpg';
 import { negocio, linkWhatsApp } from '../lib/negocio';
 
 const ano = new Date().getFullYear();
@@ -9,10 +7,14 @@ const ano = new Date().getFullYear();
 <footer id="contato" class="bg-vivah-green-dark-2 border-t border-white/10 mt-24">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 grid gap-10 md:grid-cols-3">
 		<div>
-			<div class="flex items-center gap-2 mb-3">
-				<Image src={logo} alt="Vivah Energia Solar" width={36} height={36} class="rounded-md" />
-				<span class="font-display font-extrabold text-lg">VIVAH</span>
-			</div>
+			<img
+				src="/brand/logo-vivah-horizontal.svg"
+				alt="Vivah Energia Solar"
+				width="163"
+				height="60"
+				class="h-15 w-auto mb-4"
+				loading="lazy"
+			/>
 			<p class="text-white/70 text-sm max-w-xs">
 				Energia solar e elétrica em {negocio.cidade}, com usina própria de geração e
 				atendimento em {negocio.raioAtendimento}.

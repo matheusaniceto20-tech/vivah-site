@@ -1,6 +1,4 @@
 ---
-import logo from '../assets/brand/logo.jpg';
-import { Image } from 'astro:assets';
 import { linkWhatsApp } from '../lib/negocio';
 
 const navLinks = [
@@ -14,11 +12,14 @@ const navLinks = [
 
 <header class="sticky top-0 z-40 bg-vivah-green-dark/95 backdrop-blur border-b border-white/10">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
-		<a href="/" class="flex items-center gap-2 shrink-0">
-			<Image src={logo} alt="Vivah Energia Solar" width={40} height={40} class="rounded-md" />
-			<span class="font-display font-extrabold text-lg md:text-xl tracking-wide">
-				VIV<span class="text-vivah-lime">A</span>H
-			</span>
+		<a href="/" class="shrink-0" aria-label="Vivah Energia Solar — início">
+			<img
+				src="/brand/logo-vivah-horizontal.svg"
+				alt="Vivah Energia Solar"
+				width="152"
+				height="56"
+				class="h-11 md:h-14 w-auto"
+			/>
 		</a>
 
 		<nav class="hidden md:flex items-center gap-6 font-medium text-sm">
