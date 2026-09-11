@@ -16,6 +16,7 @@ const solucoes = [
 		texto: 'Pra quem tem consumo alto: comércios, galpões e usinas em solo ou carport.',
 		itens: ['Projetos de grande porte', 'Carports e garagens solares', 'Projeto elétrico completo'],
 		mensagem: 'Quero um orçamento de energia solar para minha empresa.',
+		saibaMais: { href: '/carport', label: 'Conhecer o carport solar' },
 	},
 	{
 		icone: BatteryCharging,
@@ -24,6 +25,7 @@ const solucoes = [
 		texto: 'Armazenamento de energia (BESS) e sistemas independentes da rede, com equipe capacitada.',
 		itens: ['Energia mesmo com queda da rede', 'Ideal pra área rural ou sem rede confiável', 'Aproveita melhor a energia gerada de dia'],
 		mensagem: 'Quero saber mais sobre sistemas off-grid e baterias (BESS).',
+		saibaMais: { href: '/hibridos', label: 'Ver sistemas híbridos e BESS' },
 	},
 ];
 ---
@@ -79,14 +81,21 @@ const solucoes = [
 									</li>
 								))}
 							</ul>
-							<a
-								href={linkWhatsApp(s.mensagem)}
-								target="_blank"
-								rel="noopener noreferrer"
-								class:list={['btn mt-7', escuro ? 'btn-amarelo' : 'btn-contorno']}
-							>
-								Pedir orçamento
-							</a>
+							<div class="mt-7 flex flex-col gap-2">
+								<a
+									href={linkWhatsApp(s.mensagem)}
+									target="_blank"
+									rel="noopener noreferrer"
+									class:list={['btn', escuro ? 'btn-amarelo' : 'btn-contorno']}
+								>
+									Pedir orçamento
+								</a>
+								{s.saibaMais && (
+									<a href={s.saibaMais.href} class:list={['text-sm font-semibold text-center underline underline-offset-2', escuro ? 'text-vivah-yellow' : 'text-vivah-green-700']}>
+										{s.saibaMais.label} →
+									</a>
+								)}
+							</div>
 						</div>
 					);
 				})

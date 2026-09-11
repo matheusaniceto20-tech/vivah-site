@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BatteryCharging, Zap, ShieldCheck, Gauge, House, Building2, Tractor, Check, X, ChevronDown } from 'lucide-static';
+import { linkWhatsApp } from '../lib/negocio';
+
+const segmentos = [
+	{ icone: House, titulo: 'Residencial', texto: 'Backup pra não ficar sem energia em quedas de luz, com o conforto de casa.' },
+	{ icone: Building2, titulo: 'Comercial', texto: 'Evita perda de dados, equipamentos parados e vendas perdidas na queda de energia.' },
+	{ icone: Tractor, titulo: 'Rural', texto: 'Autonomia em propriedades sem rede elétrica confiável ou fora do alcance da rede.' },
+];
+
+const vantagens = [
+	{ icone: BatteryCharging, titulo: 'Autonomia ampliada', texto: 'A energia guardada de dia é usada quando você mais precisa: à noite ou numa queda de luz.' },
+	{ icone: Zap, titulo: 'Proteção contra quedas', texto: 'Equipamentos essenciais continuam funcionando mesmo sem rede da distribuidora.' },
+	{ icone: Gauge, titulo: 'Aproveitamento otimizado', texto: 'Menos energia desperdiçada: o que não é usado na hora fica guardado pra depois.' },
+	{ icone: ShieldCheck, titulo: 'Equipe capacitada', texto: 'A Vivah já é treinada e capacitada em sistemas de armazenamento (BESS) e projetos off-grid.' },
+];
+
+const comparativo = [
+	{ item: 'Reduz a conta de luz', semSolar: false, comSolar: true, hibrido: true },
+	{ item: 'Energia limpa e renovável', semSolar: false, comSolar: true, hibrido: true },
+	{ item: 'Continua funcionando numa queda de energia', semSolar: false, comSolar: false, hibrido: true },
+	{ item: 'Aproveita energia fora do horário de geração', semSolar: false, comSolar: false, hibrido: true },
+	{ item: 'Reduz impacto da cobrança do Fio B', semSolar: false, comSolar: false, hibrido: true },
+];
+
+const faq = [
+	{
+		p: 'O que é BESS?',
+		r: 'É a sigla de Battery Energy Storage System — sistema de armazenamento de energia em baterias. É o mesmo princípio de uma bateria residencial, só que dimensionado pra aplicações comerciais, industriais e projetos de maior porte, com gerenciamento inteligente da carga e descarga.',
+	},
+	{
+		p: 'Preciso ter energia solar instalada pra ter bateria?',
+		r: 'O mais comum é combinar os dois: os painéis geram durante o dia e o excedente carrega a bateria, que é usada à noite ou numa queda de energia. Mas também existem sistemas de bateria isolados, dependendo do caso.',
+	},
+	{
+		p: 'Funciona em apartamento?',
+		r: 'Depende do espaço e da autorização do condomínio pra instalação. Na visita técnica a gente avalia se o seu caso comporta.',
+	},
+	{
+		p: 'Quanto tempo a bateria aguenta sem sol?',
+		r: 'Depende do tamanho do banco de baterias e do consumo dos equipamentos ligados nela. É justamente isso que dimensionamos no projeto, pra cobrir o que você precisa manter funcionando.',
+	},
+	{
+		p: 'Serve pra sair da rede elétrica de vez (off-grid)?',
+		r: 'Serve, em propriedades rurais ou locais sem rede confiável. É um projeto mais robusto, dimensionado pra cobrir todo o consumo sem depender da distribuidora.',
+	},
+];
+---
+
+<Layout
+	title="Sistemas Híbridos e BESS — Armazenamento de Energia"
+	description="Sistemas híbridos com armazenamento de energia (BESS) e soluções off-grid da Vivah: autonomia mesmo com a rede fora do ar."
+	heroHeader
+>
+	<section class="relative overflow-hidden bg-vivah-green py-28 md:py-36 text-white">
+		<img src="/brand/logo-vivah-icone.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-32 -top-32 w-96 opacity-10 spin-slow" />
+		<div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+			<span class="eyebrow !bg-white/10 !text-vivah-yellow">Novidade</span>
+			<h1 class="font-display font-extrabold text-4xl md:text-6xl leading-tight">
+				Sistemas <span class="text-vivah-yellow">híbridos</span> e armazenamento de energia
+			</h1>
+			<p class="mt-5 text-lg text-white/85 max-w-2xl">
+				Além da instalação convencional, a Vivah é capacitada pra montar sistemas de armazenamento (BESS) e
+				soluções off-grid — pra quem quer independência da rede, seja por localização ou por segurança de
+				fornecimento.
+			</p>
+			<a href={linkWhatsApp('Quero saber mais sobre sistemas híbridos / BESS / off-grid.')} target="_blank" rel="noopener noreferrer" class="btn btn-amarelo mt-8">
+				Falar sobre um projeto híbrido
+			</a>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-white">
+		<div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
+				<span class="eyebrow">Como funciona</span>
+				<h2 class="titulo-secao">O ciclo do <span class="marker">sistema híbrido</span></h2>
+			</div>
+			<div class="grid sm:grid-cols-2 gap-6">
+				<div class="rounded-3xl bg-vivah-mist p-7" data-reveal="left">
+					<p class="font-display font-bold text-lg mb-2">☀️ Durante o dia</p>
+					<p class="text-sm text-vivah-muted">
+						Os painéis geram energia. O que a casa ou empresa consome na hora vem direto dos painéis; o
+						excedente carrega a bateria em vez de ir só pra rede.
+					</p>
+				</div>
+				<div class="rounded-3xl bg-vivah-green p-7 text-white" data-reveal="right">
+					<p class="font-display font-bold text-lg mb-2 text-vivah-yellow">🌙 À noite ou numa queda</p>
+					<p class="text-sm text-white/85">
+						A energia guardada na bateria assume o consumo — sem depender do sol nem da rede da
+						distribuidora estar funcionando.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-vivah-mist">
+		<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow">Pra quem</span>
+				<h2 class="titulo-secao">Onde faz <span class="marker">mais sentido</span></h2>
+			</div>
+			<div class="grid sm:grid-cols-3 gap-6">
+				{
+					segmentos.map((s, i) => (
+						<div class="rounded-3xl bg-white p-7 text-center ring-1 ring-black/5" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+							<span class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow-100 text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={s.icone} />
+							<h3 class="font-display font-bold text-lg mt-4">{s.titulo}</h3>
+							<p class="mt-2 text-sm text-vivah-muted">{s.texto}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-white">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow">Vantagens</span>
+				<h2 class="titulo-secao">Por que ter <span class="marker">armazenamento</span></h2>
+			</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{
+					vantagens.map((v, i) => (
+						<div class="rounded-3xl bg-vivah-mist/70 p-6 hover:bg-white hover:shadow-xl hover:ring-1 hover:ring-vivah-yellow hover:-translate-y-1 transition duration-300" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+							<span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-6 [&>svg]:w-6" set:html={v.icone} />
+							<h3 class="font-display font-bold text-lg mt-4 mb-1.5">{v.titulo}</h3>
+							<p class="text-sm text-vivah-muted">{v.texto}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-vivah-mist">
+		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
+				<span class="eyebrow">Comparativo</span>
+				<h2 class="titulo-secao">Sem solar × com solar × <span class="marker">com híbrido</span></h2>
+			</div>
+			<div class="overflow-x-auto rounded-3xl bg-white ring-1 ring-black/5 shadow-sm" data-reveal>
+				<table class="w-full text-sm min-w-[560px]">
+					<thead>
+						<tr class="border-b border-black/5">
+							<th class="text-left font-semibold p-4 md:p-5">&nbsp;</th>
+							<th class="p-4 md:p-5 font-display">Sem solar</th>
+							<th class="p-4 md:p-5 font-display">Com solar</th>
+							<th class="p-4 md:p-5 font-display bg-vivah-yellow-100 rounded-t-2xl">Com híbrido</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							comparativo.map((linha, i) => (
+								<tr class:list={[i % 2 === 0 ? 'bg-white' : 'bg-vivah-mist/40']}>
+									<td class="p-4 md:p-5 text-vivah-ink">{linha.item}</td>
+									<td class="p-4 md:p-5 text-center">
+										{linha.semSolar ? <span class="text-vivah-green [&>svg]:inline-block [&>svg]:h-5 [&>svg]:w-5" set:html={Check} /> : <span class="text-red-300 [&>svg]:inline-block [&>svg]:h-5 [&>svg]:w-5" set:html={X} />}
+									</td>
+									<td class="p-4 md:p-5 text-center">
+										{linha.comSolar ? <span class="text-vivah-green [&>svg]:inline-block [&>svg]:h-5 [&>svg]:w-5" set:html={Check} /> : <span class="text-red-300 [&>svg]:inline-block [&>svg]:h-5 [&>svg]:w-5" set:html={X} />}
+									</td>
+									<td class="p-4 md:p-5 text-center bg-vivah-yellow-100/60">
+										{linha.hibrido ? <span class="text-vivah-green [&>svg]:inline-block [&>svg]:h-5 [&>svg]:w-5" set:html={Check} /> : <span class="text-red-300 [&>svg]:inline-block [&>svg]:h-5 [&>svg]:w-5" set:html={X} />}
+									</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-white">
+		<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+			<h2 class="titulo-secao text-center mb-12">Perguntas sobre híbridos e BESS</h2>
+			<div class="space-y-3">
+				{
+					faq.map((item) => (
+						<details class="group rounded-2xl bg-vivah-mist p-5 ring-1 ring-transparent open:bg-white open:ring-vivah-yellow open:shadow-lg transition">
+							<summary class="flex items-center justify-between gap-4 cursor-pointer font-semibold list-none">
+								{item.p}
+								<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-vivah-yellow text-vivah-green [&>svg]:h-4 [&>svg]:w-4 group-open:rotate-180 transition-transform" set:html={ChevronDown} />
+							</summary>
+							<p class="mt-3 text-sm text-vivah-muted">{item.r}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-vivah-yellow py-16 text-center">
+		<h2 class="font-display font-extrabold text-3xl md:text-4xl text-vivah-green">Quer independência da rede elétrica?</h2>
+		<a href={linkWhatsApp('Quero saber mais sobre sistemas híbridos / BESS / off-grid.')} target="_blank" rel="noopener noreferrer" class="btn btn-verde mt-6">
+			Falar com a Vivah
+		</a>
+	</section>
+</Layout>
