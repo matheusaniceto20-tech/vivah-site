@@ -7,9 +7,11 @@ import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 interface Props {
 	title: string;
 	description: string;
+	/** header transparente por cima do hero (só na home) */
+	heroHeader?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, heroHeader = false } = Astro.props;
 const siteTitle = title.includes('Vivah') ? title : `${title} · Vivah Energia Solar`;
 ---
 
@@ -20,22 +22,42 @@ const siteTitle = title.includes('Vivah') ? title : `${title} · Vivah Energia S
 		<meta name="generator" content={Astro.generator} />
 		<title>{siteTitle}</title>
 		<meta name="description" content={description} />
+		<meta name="theme-color" content="#003000" />
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+		<script is:inline>
+			document.documentElement.classList.add('js');
+			// se o script de efeitos não carregar, mostra o conteúdo mesmo assim
+			window.addEventListener('load', function () {
+				setTimeout(function () {
+					if (window.__vivahFx) return;
+					document.querySelectorAll('[data-reveal]').forEach(function (el) {
+						el.classList.add('revealed');
+					});
+				}, 1500);
+			});
+		</script>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
-	<body class="bg-vivah-green-dark text-white">
-		<Header />
+	<body class="bg-white text-vivah-ink antialiased">
+		<Header transparent={heroHeader} />
+		{!heroHeader && <div class="h-16 md:h-20" aria-hidden="true"></div>}
 		<main>
 			<slot />
 		</main>
 		<Footer />
 		<WhatsAppFloat />
+
+		<script>
+			import { iniciarEfeitos } from '../lib/efeitos';
+			iniciarEfeitos();
+		</script>
 	</body>
 </html>

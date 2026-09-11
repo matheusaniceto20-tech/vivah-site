@@ -1,77 +1,530 @@
 ---
-import { linkWhatsApp } from '../lib/negocio';
+import { House, Building2, Tractor, Factory, Camera, Info, ChevronDown, ArrowRight } from 'lucide-static';
+
+const imoveis = [
+	{ valor: 'Casa', rotulo: 'Casa', icone: House },
+	{ valor: 'Comércio ou empresa', rotulo: 'Comércio / empresa', icone: Building2 },
+	{ valor: 'Propriedade rural', rotulo: 'Propriedade rural', icone: Tractor },
+	{ valor: 'Indústria', rotulo: 'Indústria', icone: Factory },
+];
+const telhados = ['Cerâmica', 'Metálico / zinco', 'Laje', 'Solo ou garagem', 'Não sei'];
+const ligacoes = [
+	{ valor: 'monofasico', rotulo: 'Monofásico' },
+	{ valor: 'bifasico', rotulo: 'Bifásico' },
+	{ valor: 'trifasico', rotulo: 'Trifásico' },
+	{ valor: 'nao_sei', rotulo: 'Não sei' },
+];
+const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+const etapas = ['Imóvel', 'Sua conta', 'Contato'];
+
+const chip =
+	'block cursor-pointer rounded-full border-2 border-vivah-mist bg-vivah-mist/70 px-4 py-2 text-sm font-semibold text-vivah-ink transition hover:border-vivah-yellow peer-checked:border-vivah-green peer-checked:bg-vivah-yellow-100 peer-focus-visible:ring-4 peer-focus-visible:ring-vivah-yellow';
+const rotulo = 'block text-sm font-semibold mb-1.5';
 ---
 
-<section id="simulador" class="py-20 md:py-28 bg-vivah-green-dark-2">
-	<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-		<h2 class="font-display font-extrabold text-3xl md:text-4xl">Quanto você pode economizar?</h2>
-		<p class="mt-3 text-white/70">
-			Digita o valor médio da sua conta de luz e veja uma estimativa de economia com energia solar.
-		</p>
+<section id="simulador" class="relative py-20 md:py-28 bg-vivah-cream overflow-hidden scroll-mt-16">
+	<img
+		src="/brand/logo-vivah-icone.svg"
+		alt=""
+		aria-hidden="true"
+		class="pointer-events-none absolute -right-28 -top-28 w-96 opacity-25 spin-slow"
+	/>
 
-		<form id="simulador-form" class="mt-10 bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 text-left">
-			<label for="conta" class="block text-sm font-medium text-white/80 mb-2">
-				Valor médio da sua conta de luz (R$)
-			</label>
-			<input
-				type="number"
-				id="conta"
-				name="conta"
-				min="0"
-				step="1"
-				placeholder="Ex: 450"
-				class="w-full rounded-xl bg-vivah-green-dark border border-white/20 px-4 py-3 text-lg focus:outline-none focus:border-vivah-lime"
-				required
-			/>
+	<div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+		<div class="text-center max-w-2xl mx-auto" data-reveal>
+			<span class="eyebrow">Simulador solar</span>
+			<h2 class="titulo-secao">Descubra o sistema <span class="marker">ideal pra você</span></h2>
+			<p class="mt-4 text-vivah-muted">
+				Com os dados da sua conta de luz, a gente calcula a potência, o número de placas e a economia estimada. Leva
+				1 minuto.
+			</p>
+		</div>
 
-			<button
-				type="submit"
-				class="mt-4 w-full bg-vivah-yellow text-vivah-green-dark font-bold px-6 py-3.5 rounded-full hover:brightness-95 transition"
-			>
-				Calcular minha economia
-			</button>
-
-			<div id="resultado" hidden class="mt-6 grid sm:grid-cols-2 gap-4 text-center">
-				<div class="bg-vivah-green-dark rounded-xl p-4 border border-vivah-lime/40">
-					<p class="text-xs text-white/60 uppercase tracking-wide">Economia estimada/mês</p>
-					<p class="font-display font-extrabold text-2xl text-vivah-lime mt-1" id="resultado-economia">—</p>
-				</div>
-				<div class="bg-vivah-green-dark rounded-xl p-4 border border-vivah-yellow/40">
-					<p class="text-xs text-white/60 uppercase tracking-wide">Economia estimada/ano</p>
-					<p class="font-display font-extrabold text-2xl text-vivah-yellow mt-1" id="resultado-economia-ano">—</p>
+		<div
+			id="sim-card"
+			class="mt-10 scroll-mt-24 overflow-hidden rounded-3xl bg-white shadow-2xl shadow-vivah-green/10 ring-1 ring-black/5"
+			data-reveal="zoom"
+		>
+			<div id="sim-progresso" class="px-6 md:px-10 pt-6">
+				<ol class="flex items-center justify-between gap-2 text-xs font-semibold text-vivah-muted">
+					{
+						etapas.map((etapa, i) => (
+							<li data-etapa={i} data-ativo={i === 0 ? 'true' : 'false'} class="flex items-center gap-2 data-[ativo=true]:text-vivah-green">
+								<span class="flex h-6 w-6 items-center justify-center rounded-full bg-vivah-mist text-[11px] transition">{i + 1}</span>
+								{etapa}
+							</li>
+						))
+					}
+				</ol>
+				<div class="mt-3 h-1.5 overflow-hidden rounded-full bg-vivah-mist">
+					<div id="sim-barra" class="h-full w-1/3 rounded-full bg-vivah-yellow transition-all duration-500"></div>
 				</div>
 			</div>
 
-			<p id="resultado-cta" hidden class="text-center text-sm text-white/70 mt-5">
-				Estimativa aproximada. Pra um número exato, <a href={linkWhatsApp('Fiz a simulação no site e quero um orçamento exato.')} target="_blank" rel="noopener noreferrer" class="text-vivah-yellow font-semibold underline underline-offset-2">peça um orçamento sem compromisso</a>.
-			</p>
-		</form>
+			<form
+				id="sim-form"
+				name="simulacao"
+				method="POST"
+				action="/obrigado"
+				data-netlify="true"
+				netlify-honeypot="bot-field"
+				enctype="multipart/form-data"
+				novalidate
+				class="p-6 md:p-10"
+			>
+				<input type="hidden" name="form-name" value="simulacao" />
+				<p class="hidden"><label>Não preencha isso: <input name="bot-field" /></label></p>
+				<!-- resultado calculado, enviado junto com o lead -->
+				<input type="hidden" name="consumo_medio_kwh" />
+				<input type="hidden" name="resultado_kwp" />
+				<input type="hidden" name="resultado_placas" />
+				<input type="hidden" name="resultado_area_m2" />
+				<input type="hidden" name="resultado_geracao_kwh_mes" />
+				<input type="hidden" name="resultado_economia_mes" />
+
+				<!-- 1. Imóvel -->
+				<fieldset data-passo="0" class="space-y-8">
+					<div>
+						<legend class="font-display font-bold text-xl text-vivah-ink">Onde vai ser a instalação?</legend>
+						<div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+							{
+								imoveis.map((imovel) => (
+									<label class="relative">
+										<input type="radio" name="tipo_imovel" value={imovel.valor} required class="peer sr-only" />
+										<span class="flex h-full cursor-pointer flex-col items-center gap-2 rounded-2xl border-2 border-vivah-mist bg-vivah-mist/60 px-3 py-5 text-center text-sm font-semibold text-vivah-ink transition hover:border-vivah-yellow peer-checked:border-vivah-green peer-checked:bg-vivah-yellow-100 peer-focus-visible:ring-4 peer-focus-visible:ring-vivah-yellow">
+											<span class="text-vivah-green [&>svg]:h-8 [&>svg]:w-8" set:html={imovel.icone} />
+											{imovel.rotulo}
+										</span>
+									</label>
+								))
+							}
+						</div>
+					</div>
+
+					<div>
+						<p class="font-display font-bold text-lg text-vivah-ink">Tipo de telhado ou local</p>
+						<div class="mt-3 flex flex-wrap gap-2">
+							{
+								telhados.map((telhado) => (
+									<label>
+										<input type="radio" name="tipo_telhado" value={telhado} class="peer sr-only" checked={telhado === 'Não sei'} />
+										<span class={chip}>{telhado}</span>
+									</label>
+								))
+							}
+						</div>
+					</div>
+
+					<div class="flex justify-end">
+						<button type="button" data-avancar class="btn btn-verde">
+							Continuar <span class="[&>svg]:h-5 [&>svg]:w-5" set:html={ArrowRight} />
+						</button>
+					</div>
+				</fieldset>
+
+				<!-- 2. Conta de luz -->
+				<fieldset data-passo="1" hidden class="space-y-7">
+					<legend class="font-display font-bold text-xl text-vivah-ink">Dados da sua conta de luz</legend>
+
+					<div class="flex gap-3 rounded-2xl bg-vivah-yellow-100 p-4 text-sm text-vivah-ink">
+						<span class="mt-0.5 shrink-0 text-vivah-green-700 [&>svg]:h-5 [&>svg]:w-5" set:html={Info} />
+						<p>
+							Pega uma conta recente. O <strong>consumo em kWh</strong> aparece no quadro de consumo, e o histórico dos
+							últimos meses fica no gráfico de barras. Sem a conta em mãos? Informe só o valor em R$.
+						</p>
+					</div>
+
+					<div class="grid sm:grid-cols-2 gap-4">
+						<div>
+							<label for="sim-consumo" class={rotulo}>Consumo médio (kWh por mês)</label>
+							<input id="sim-consumo" name="consumo_informado_kwh" type="number" min="0" step="1" inputmode="numeric" placeholder="Ex: 450" class="campo" />
+						</div>
+						<div>
+							<label for="sim-valor" class={rotulo}>Valor médio da conta (R$)</label>
+							<input id="sim-valor" name="valor_conta" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Ex: 520" class="campo" />
+						</div>
+					</div>
+
+					<details class="group rounded-2xl p-4 ring-1 ring-black/10">
+						<summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-vivah-green-700">
+							Tenho o histórico dos últimos 12 meses (fica mais preciso)
+							<span class="transition group-open:rotate-180 [&>svg]:h-5 [&>svg]:w-5" set:html={ChevronDown} />
+						</summary>
+						<p class="mt-3 text-xs text-vivah-muted">Preencha o que tiver, no mínimo 3 meses. Usamos a média.</p>
+						<div class="mt-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+							{
+								meses.map((mes, i) => (
+									<label class="text-xs font-semibold text-vivah-muted">
+										{mes}
+										<input
+											type="number"
+											name={`historico_${String(i + 1).padStart(2, '0')}`}
+											min="0"
+											step="1"
+											inputmode="numeric"
+											placeholder="kWh"
+											data-historico
+											class="campo mt-1 !px-2 !py-2 text-sm"
+										/>
+									</label>
+								))
+							}
+						</div>
+					</details>
+
+					<div>
+						<p class={rotulo}>
+							Tipo de ligação <span class="font-normal text-vivah-muted">(vem escrito na conta)</span>
+						</p>
+						<div class="flex flex-wrap gap-2">
+							{
+								ligacoes.map((ligacao) => (
+									<label>
+										<input type="radio" name="tipo_ligacao" value={ligacao.valor} class="peer sr-only" checked={ligacao.valor === 'nao_sei'} />
+										<span class={chip}>{ligacao.rotulo}</span>
+									</label>
+								))
+							}
+						</div>
+					</div>
+
+					<div>
+						<p class={rotulo}>
+							Foto da conta de luz <span class="font-normal text-vivah-muted">(opcional, ajuda no orçamento)</span>
+						</p>
+						<label
+							for="sim-foto"
+							class="flex cursor-pointer items-center gap-3 rounded-2xl border-2 border-dashed border-vivah-green/25 px-4 py-4 transition hover:border-vivah-green/60"
+						>
+							<span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-vivah-mist text-vivah-green [&>svg]:h-5 [&>svg]:w-5" set:html={Camera} />
+							<span class="text-sm">
+								<span id="sim-foto-nome" class="font-semibold">Escolher arquivo</span>
+								<span class="block text-xs text-vivah-muted">Imagem ou PDF, até 8 MB</span>
+							</span>
+						</label>
+						<input id="sim-foto" name="foto_conta" type="file" accept="image/*,application/pdf" class="sr-only" />
+					</div>
+
+					<div class="flex justify-between gap-3">
+						<button type="button" data-voltar class="btn btn-contorno">Voltar</button>
+						<button type="button" data-avancar class="btn btn-verde">
+							Continuar <span class="[&>svg]:h-5 [&>svg]:w-5" set:html={ArrowRight} />
+						</button>
+					</div>
+				</fieldset>
+
+				<!-- 3. Contato -->
+				<fieldset data-passo="2" hidden class="space-y-5">
+					<legend class="font-display font-bold text-xl text-vivah-ink">Pra onde mandamos o resultado?</legend>
+					<p class="text-sm text-vivah-muted">Mostramos o resultado aqui na tela e a equipe te chama pra fechar os detalhes.</p>
+
+					<div>
+						<label for="sim-nome" class={rotulo}>Nome</label>
+						<input id="sim-nome" name="nome" type="text" required autocomplete="name" class="campo" />
+					</div>
+					<div class="grid sm:grid-cols-2 gap-4">
+						<div>
+							<label for="sim-whatsapp" class={rotulo}>WhatsApp</label>
+							<input
+								id="sim-whatsapp"
+								name="whatsapp"
+								type="tel"
+								required
+								autocomplete="tel"
+								inputmode="tel"
+								placeholder="(63) 99999-9999"
+								pattern="\(\d{2}\) \d{4,5}-\d{4}"
+								class="campo"
+							/>
+						</div>
+						<div>
+							<label for="sim-email" class={rotulo}>E-mail <span class="font-normal text-vivah-muted">(opcional)</span></label>
+							<input id="sim-email" name="email" type="email" autocomplete="email" class="campo" />
+						</div>
+					</div>
+					<div>
+						<label for="sim-cidade" class={rotulo}>Cidade</label>
+						<input id="sim-cidade" name="cidade" type="text" required value="Palmas - TO" autocomplete="address-level2" class="campo" />
+					</div>
+
+					<label class="flex items-start gap-3 text-sm text-vivah-muted">
+						<input type="checkbox" name="consentimento" value="sim" required class="mt-1 h-4 w-4 accent-vivah-green" />
+						<span>
+							Concordo em ser contatado pela Vivah sobre esta simulação, conforme a
+							<a href="/privacidade" target="_blank" class="font-semibold text-vivah-green-700 underline underline-offset-2">política de privacidade</a>.
+						</span>
+					</label>
+
+					<div class="flex justify-between gap-3 pt-2">
+						<button type="button" data-voltar class="btn btn-contorno">Voltar</button>
+						<button type="submit" id="sim-enviar" class="btn btn-verde">
+							Ver meu resultado <span class="[&>svg]:h-5 [&>svg]:w-5" set:html={ArrowRight} />
+						</button>
+					</div>
+				</fieldset>
+
+				<p id="sim-erro" role="alert" hidden class="mt-5 rounded-xl bg-red-50 p-4 text-sm font-semibold text-red-800"></p>
+			</form>
+
+			<div id="sim-resultado" hidden class="p-6 md:p-10" aria-live="polite">
+				<div class="flex items-center gap-3">
+					<span class="flex h-12 w-12 items-center justify-center rounded-full bg-vivah-green">
+						<img src="/brand/logo-vivah-icone.svg" alt="" aria-hidden="true" class="w-8 spin-slow" />
+					</span>
+					<div>
+						<p class="text-sm text-vivah-muted">Resultado da simulação</p>
+						<h3 id="res-titulo" class="font-display font-extrabold text-2xl text-vivah-ink">Seu sistema ideal</h3>
+					</div>
+				</div>
+
+				<div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+					<div class="rounded-2xl bg-vivah-mist p-4">
+						<p class="text-xs text-vivah-muted">Potência do sistema</p>
+						<p class="font-display font-extrabold text-2xl text-vivah-green" id="res-kwp">—</p>
+					</div>
+					<div class="rounded-2xl bg-vivah-mist p-4">
+						<p class="text-xs text-vivah-muted">Placas de 700 W</p>
+						<p class="font-display font-extrabold text-2xl text-vivah-green" id="res-placas">—</p>
+					</div>
+					<div class="rounded-2xl bg-vivah-mist p-4">
+						<p class="text-xs text-vivah-muted">Área no telhado</p>
+						<p class="font-display font-extrabold text-2xl text-vivah-green" id="res-area">—</p>
+					</div>
+					<div class="rounded-2xl bg-vivah-mist p-4">
+						<p class="text-xs text-vivah-muted">Geração estimada</p>
+						<p class="font-display font-extrabold text-2xl text-vivah-green" id="res-geracao">—</p>
+					</div>
+				</div>
+
+				<div class="mt-3 grid md:grid-cols-3 gap-3">
+					<div class="md:col-span-2 rounded-2xl bg-vivah-green p-6 text-white">
+						<p class="text-sm text-white/70">Economia estimada</p>
+						<p class="font-display font-extrabold text-4xl md:text-5xl text-vivah-yellow">
+							<span id="res-economia-mes">—</span><span class="text-lg font-semibold text-white/80"> /mês</span>
+						</p>
+						<p class="mt-1 text-white/80">
+							cerca de <strong id="res-economia-ano">—</strong> por ano · <strong id="res-percentual">—</strong> da conta
+						</p>
+					</div>
+					<div class="rounded-2xl bg-vivah-yellow-100 p-6">
+						<p class="text-sm text-vivah-muted">Sua conta de luz</p>
+						<p class="mt-1 text-vivah-muted line-through" id="res-conta-antes">—</p>
+						<p class="font-display font-extrabold text-3xl text-vivah-green" id="res-conta-depois">—</p>
+						<p class="mt-1 text-xs text-vivah-muted">estimativa depois do sistema</p>
+					</div>
+				</div>
+
+				<p id="res-aviso-baixo" hidden class="mt-4 rounded-xl bg-vivah-yellow-100 p-4 text-sm">
+					Seu consumo é baixo, então a economia em reais também fica pequena. Vale conversar com a equipe pra ver se
+					compensa no seu caso.
+				</p>
+				<p id="res-aviso-envio" hidden class="mt-4 rounded-xl bg-red-50 p-4 text-sm text-red-800">
+					Não conseguimos registrar seus dados agora. Chama a gente no WhatsApp que a gente continua daqui.
+				</p>
+				<p class="mt-4 text-xs text-vivah-muted">
+					Estimativa com base na média de sol em Palmas e nos dados que você informou. O projeto final é definido na
+					visita técnica.
+				</p>
+
+				<div class="mt-6 flex flex-col sm:flex-row gap-3">
+					<a id="res-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-amarelo">
+						Receber o orçamento no WhatsApp
+					</a>
+					<button type="button" id="res-refazer" class="btn btn-contorno">Refazer simulação</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
 
 <script>
-	const form = document.getElementById('simulador-form') as HTMLFormElement | null;
-	const resultado = document.getElementById('resultado');
-	const resultadoCta = document.getElementById('resultado-cta');
-	const economiaEl = document.getElementById('resultado-economia');
-	const economiaAnoEl = document.getElementById('resultado-economia-ano');
+	import { dimensionar, consumoPeloValor, type Ligacao, type Resultado } from '../lib/dimensionamento';
+	import { linkWhatsApp } from '../lib/negocio';
 
-	const formatBRL = (valor: number) =>
-		valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+	const form = document.getElementById('sim-form') as HTMLFormElement | null;
+	if (form) iniciarSimulador(form);
 
-	form?.addEventListener('submit', (event) => {
-		event.preventDefault();
-		const input = document.getElementById('conta') as HTMLInputElement | null;
-		const valor = Number(input?.value ?? 0);
-		if (!valor || valor <= 0) return;
+	function iniciarSimulador(form: HTMLFormElement) {
+		const card = document.getElementById('sim-card') as HTMLElement;
+		const progresso = document.getElementById('sim-progresso') as HTMLElement;
+		const barra = document.getElementById('sim-barra') as HTMLElement;
+		const erro = document.getElementById('sim-erro') as HTMLElement;
+		const resultado = document.getElementById('sim-resultado') as HTMLElement;
+		const enviar = document.getElementById('sim-enviar') as HTMLButtonElement;
+		const passos = [...form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-passo]')];
+		const etapas = [...document.querySelectorAll<HTMLElement>('[data-etapa]')];
+		const campo = (nome: string) => form.elements.namedItem(nome) as HTMLInputElement;
+		let atual = 0;
 
-		// Estimativa conservadora: até 80% de economia mensal, conforme material da Vivah.
-		const economiaMensal = valor * 0.8;
-		const economiaAnual = economiaMensal * 12;
+		const brl = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+		const num = (v: number, casas = 0) => v.toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
 
-		if (economiaEl) economiaEl.textContent = formatBRL(economiaMensal);
-		if (economiaAnoEl) economiaAnoEl.textContent = formatBRL(economiaAnual);
-		resultado?.removeAttribute('hidden');
-		resultadoCta?.removeAttribute('hidden');
-	});
+		function positivo(nome: string) {
+			const v = parseFloat((campo(nome)?.value ?? '').replace(',', '.'));
+			return Number.isFinite(v) && v > 0 ? v : undefined;
+		}
+
+		function consumoMedio() {
+			const historico = [...form.querySelectorAll<HTMLInputElement>('[data-historico]')]
+				.map((i) => parseFloat(i.value))
+				.filter((v) => Number.isFinite(v) && v > 0);
+			if (historico.length >= 3) return historico.reduce((a, b) => a + b, 0) / historico.length;
+			const informado = positivo('consumo_informado_kwh');
+			if (informado) return informado;
+			const valor = positivo('valor_conta');
+			return valor ? consumoPeloValor(valor) : undefined;
+		}
+
+		function mostrarErro(mensagem = '') {
+			erro.textContent = mensagem;
+			erro.hidden = !mensagem;
+		}
+
+		function irPara(i: number) {
+			mostrarErro();
+			atual = i;
+			passos.forEach((p, idx) => (p.hidden = idx !== i));
+			barra.style.width = `${((i + 1) / passos.length) * 100}%`;
+			etapas.forEach((el, idx) => (el.dataset.ativo = String(idx <= i)));
+			card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+
+		function validar(i: number) {
+			mostrarErro();
+			for (const c of passos[i].querySelectorAll<HTMLInputElement>('input, select, textarea')) {
+				if (!c.checkValidity()) {
+					c.reportValidity();
+					return false;
+				}
+			}
+			if (i === 1) {
+				if (!consumoMedio()) {
+					mostrarErro('Informe o consumo em kWh, o valor da conta ou pelo menos 3 meses do histórico.');
+					return false;
+				}
+				const arquivo = campo('foto_conta').files?.[0];
+				if (arquivo && arquivo.size > 8 * 1024 * 1024) {
+					mostrarErro('A foto da conta precisa ter até 8 MB.');
+					return false;
+				}
+			}
+			return true;
+		}
+
+		form.addEventListener('click', (e) => {
+			const alvo = e.target as HTMLElement;
+			if (alvo.closest('[data-avancar]') && validar(atual)) irPara(atual + 1);
+			if (alvo.closest('[data-voltar]')) irPara(atual - 1);
+		});
+
+		campo('foto_conta').addEventListener('change', (e) => {
+			const arquivo = (e.target as HTMLInputElement).files?.[0];
+			const nome = document.getElementById('sim-foto-nome');
+			if (nome) nome.textContent = arquivo ? arquivo.name : 'Escolher arquivo';
+		});
+
+		// máscara simples do WhatsApp: (63) 99999-9999
+		const whatsapp = campo('whatsapp');
+		whatsapp.addEventListener('input', () => {
+			const d = whatsapp.value.replace(/\D/g, '').slice(0, 11);
+			let v = d;
+			if (d.length > 2) v = `(${d.slice(0, 2)}) ${d.slice(2)}`;
+			if (d.length > 6) v = `(${d.slice(0, 2)}) ${d.slice(2, d.length - 4)}-${d.slice(-4)}`;
+			whatsapp.value = v;
+		});
+
+		function animarTexto(id: string, alvo: number, formatar: (v: number) => string) {
+			const el = document.getElementById(id);
+			if (!el) return;
+			const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (reduzido) {
+				el.textContent = formatar(alvo);
+				return;
+			}
+			const inicio = performance.now();
+			const passo = (agora: number) => {
+				const p = Math.min((agora - inicio) / 900, 1);
+				el.textContent = formatar(alvo * (1 - Math.pow(1 - p, 3)));
+				if (p < 1) requestAnimationFrame(passo);
+			};
+			requestAnimationFrame(passo);
+		}
+
+		function mostrarResultado(r: Resultado, registrado: boolean) {
+			form.hidden = true;
+			progresso.hidden = true;
+			resultado.hidden = false;
+			const nome = (campo('nome').value || '').trim().split(' ')[0];
+			const titulo = document.getElementById('res-titulo');
+			if (titulo) titulo.textContent = nome ? `${nome}, esse é o seu sistema ideal` : 'Seu sistema ideal';
+
+			animarTexto('res-kwp', r.kwp, (v) => `${num(v, 1)} kWp`);
+			animarTexto('res-placas', r.placas, (v) => num(Math.round(v)));
+			animarTexto('res-area', r.areaM2, (v) => `${num(Math.round(v))} m²`);
+			animarTexto('res-geracao', r.geracaoKwhMes, (v) => `${num(Math.round(v))} kWh`);
+			animarTexto('res-economia-mes', r.economiaMes, brl);
+			animarTexto('res-economia-ano', r.economiaAno, brl);
+			animarTexto('res-percentual', r.percentual * 100, (v) => `${num(Math.round(v))}%`);
+			(document.getElementById('res-conta-antes') as HTMLElement).textContent = brl(r.contaAtual);
+			animarTexto('res-conta-depois', r.contaDepois, brl);
+
+			(document.getElementById('res-aviso-baixo') as HTMLElement).hidden = !r.baixoConsumo;
+			(document.getElementById('res-aviso-envio') as HTMLElement).hidden = registrado;
+
+			const mensagem = [
+				`Olá! Sou ${campo('nome').value.trim()} e fiz a simulação no site da Vivah.`,
+				`Consumo médio: ${num(Math.round(r.consumoKwh))} kWh/mês`,
+				`Sistema estimado: ${num(r.kwp, 1)} kWp (${r.placas} placas)`,
+				`Economia estimada: ${brl(r.economiaMes)}/mês`,
+				'Quero um orçamento.',
+			].join('\n');
+			(document.getElementById('res-whatsapp') as HTMLAnchorElement).href = linkWhatsApp(mensagem);
+			card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			if (!validar(atual)) return;
+
+			const consumo = consumoMedio() as number;
+			const ligacao = (form.querySelector<HTMLInputElement>('input[name="tipo_ligacao"]:checked')?.value ?? 'nao_sei') as Ligacao;
+			const r = dimensionar({ consumoKwh: consumo, valorConta: positivo('valor_conta'), ligacao });
+
+			const ocultos: Record<string, string> = {
+				consumo_medio_kwh: String(Math.round(consumo)),
+				resultado_kwp: r.kwp.toFixed(1),
+				resultado_placas: String(r.placas),
+				resultado_area_m2: String(Math.round(r.areaM2)),
+				resultado_geracao_kwh_mes: String(Math.round(r.geracaoKwhMes)),
+				resultado_economia_mes: r.economiaMes.toFixed(0),
+			};
+			for (const [nome, valor] of Object.entries(ocultos)) campo(nome).value = valor;
+
+			const textoBotao = enviar.innerHTML;
+			enviar.disabled = true;
+			enviar.innerHTML = '<img src="/brand/logo-vivah-icone.svg" alt="" class="h-5 w-5 spin-fast"> Calculando...';
+
+			let registrado = false;
+			try {
+				const resposta = await fetch('/', { method: 'POST', body: new FormData(form) });
+				registrado = resposta.ok;
+			} catch {
+				registrado = false;
+			}
+
+			enviar.disabled = false;
+			enviar.innerHTML = textoBotao;
+			mostrarResultado(r, registrado);
+		});
+
+		document.getElementById('res-refazer')?.addEventListener('click', () => {
+			form.reset();
+			const nome = document.getElementById('sim-foto-nome');
+			if (nome) nome.textContent = 'Escolher arquivo';
+			form.hidden = false;
+			progresso.hidden = false;
+			resultado.hidden = true;
+			irPara(0);
+		});
+	}
 </script>

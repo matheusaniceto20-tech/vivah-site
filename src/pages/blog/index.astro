@@ -8,26 +8,33 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 ---
 
 <Layout title="Blog" description="Artigos sobre energia solar, economia e sustentabilidade — Vivah Energia Solar.">
-	<section class="py-20 md:py-28">
+	<section class="py-16 md:py-20 bg-vivah-cream">
 		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-			<h1 class="font-display font-extrabold text-4xl mb-3">Blog</h1>
-			<p class="text-white/70 mb-12">Conteúdo sobre energia solar, economia e sustentabilidade.</p>
+			<span class="eyebrow">Blog</span>
+			<h1 class="titulo-secao">Conteúdo sobre <span class="marker">energia solar</span></h1>
+			<p class="mt-4 text-vivah-muted">Economia, funcionamento e o que considerar antes de instalar.</p>
+		</div>
+	</section>
 
-			<div class="space-y-6">
-				{posts.map((post) => (
-					<a href={`/blog/${post.id}`} class="block bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-vivah-lime/40 transition-colors">
-						<p class="text-xs text-white/50 mb-2">
+	<section class="py-14 md:py-20 bg-white">
+		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-6">
+			{
+				posts.map((post) => (
+					<a
+						href={`/blog/${post.id}`}
+						class="block rounded-2xl p-6 ring-1 ring-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:ring-vivah-yellow transition duration-300"
+						data-reveal
+					>
+						<p class="text-xs text-vivah-muted mb-2">
 							{post.data.publishedAt.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
 						</p>
-						<h2 class="font-display font-bold text-xl mb-2">{post.data.title}</h2>
-						<p class="text-white/70 text-sm">{post.data.description}</p>
+						<h2 class="font-display font-bold text-xl text-vivah-ink mb-2">{post.data.title}</h2>
+						<p class="text-vivah-muted text-sm">{post.data.description}</p>
+						<span class="inline-block mt-4 text-sm font-semibold text-vivah-green-700">Ler artigo →</span>
 					</a>
-				))}
-
-				{posts.length === 0 && (
-					<p class="text-white/60">Ainda não temos artigos publicados. Em breve!</p>
-				)}
-			</div>
+				))
+			}
+			{posts.length === 0 && <p class="text-vivah-muted">Ainda não temos artigos publicados. Em breve!</p>}
 		</div>
 	</section>
 </Layout>

@@ -1,0 +1,145 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { ChevronLeft, ChevronRight } from 'lucide-static';
+import { negocio } from '../lib/negocio';
+import painel from '../assets/avaliacoes/painel.png';
+
+// Recortes dos prints reais do perfil da Vivah no Google (identidade/Screenshots, 11/09/2026).
+const prints = import.meta.glob<{ default: ImageMetadata }>('../assets/avaliacoes/*.png', { eager: true });
+const print = (id: string) => prints[`../assets/avaliacoes/${id}.png`].default;
+
+const avaliacoes = [
+	{
+		id: 'jahiny',
+		autor: 'Jahiny Guimaraes',
+		texto: 'Pré e pós venda de excelência! Empresa realmente comprometida com o cliente e o trabalho desempenhado! Vale toda a confiança!',
+	},
+	{
+		id: 'joana',
+		autor: 'Joana Cardoso',
+		texto: 'Vim avaliar após um ano de instalação da minha energia solar, nunca tive nenhum problema e sempre tive um excelente atendimento no pós-venda.',
+	},
+	{
+		id: 'gustavo',
+		autor: 'Gustavo Oliveira',
+		texto: 'Excelente atendimento! O suporte do pós venda é um grande diferencial. Tira todas as dúvidas. E entrega o que é proposto.',
+	},
+	{ id: 'luciana', autor: 'Luciana Sara Sarah', texto: 'A melhor de Palmas. Atendimento e pós venda maravilhosa.' },
+	{
+		id: 'eduardo',
+		autor: 'Eduardo Bitencourt',
+		texto: 'Pessoal de prontidão, responsáveis, e extremamente profissionais na área de atuação. Recomendo de olhos fechados!',
+	},
+	{
+		id: 'allan',
+		autor: 'Allan Bruno',
+		texto: 'Ótimo atendimento e serviço de qualidade. Equipe profissional, responsável e muito comprometida. Tudo feito conforme combinado.',
+	},
+	{
+		id: 'carlos',
+		autor: 'Carlos Souza',
+		texto: 'Empresa muito boa, materiais a pronta entrega que facilitou muito em agilidade na instalação, 10 dias estava tudo pronto.',
+	},
+	{
+		id: 'stela',
+		autor: 'Stela de Sousa Batista',
+		texto: 'Eu sempre tive vontade de colocar energia solar na minha casa [...] Não me arrependo, e recomendo.',
+	},
+	{
+		id: 'joao-rodolfo',
+		autor: 'João Rodolfo Milani Faquinelli',
+		texto: 'Quero agradecer demais não só pela venda, negociação e preço. Mas pela qualidade da entrega, dos produtos, do trabalho e principalmente pelo pós venda!',
+	},
+	{ id: 'jaciara', autor: 'Jaciara Barbosa', texto: 'Atendimento de excelência, ótimos profissionais. Recomendo de olhos fechados.' },
+	{ id: 'marcelo', autor: 'Marcelo Ilan', texto: 'Serviço de qualidade.' },
+].map((a) => ({ ...a, imagem: print(a.id) }));
+---
+
+<section id="avaliacoes" class="relative py-20 md:py-28 bg-vivah-cream overflow-hidden scroll-mt-20">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6" data-reveal>
+			<div>
+				<span class="eyebrow">Avaliações</span>
+				<h2 class="titulo-secao">Quem instalou, <span class="marker">recomenda</span></h2>
+				<p class="mt-4 text-vivah-muted max-w-xl">
+					Prints reais do nosso perfil no Google. As {negocio.avaliacoesGoogle} avaliações são todas 5 estrelas.
+				</p>
+			</div>
+			<a href={negocio.googlePerfilUrl} target="_blank" rel="noopener noreferrer" class="btn btn-verde shrink-0">
+				Ver todas no Google
+			</a>
+		</div>
+
+		<div class="mt-10 grid lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] gap-8 items-start">
+			<figure
+				class="rounded-3xl bg-white p-3 shadow-xl shadow-vivah-green/10 ring-1 ring-black/5 lg:sticky lg:top-28"
+				data-reveal="left"
+			>
+				<Image
+					src={painel}
+					format="png"
+					alt={`Perfil da ${negocio.nome} no Google: nota 5,0 com ${negocio.avaliacoesGoogle} avaliações`}
+					class="w-full h-auto rounded-2xl"
+				/>
+				<figcaption class="px-2 pt-3 pb-1 text-xs text-vivah-muted">Print do perfil da Vivah no Google</figcaption>
+			</figure>
+
+			<div class="min-w-0" data-reveal="right">
+				<div class="mb-3 hidden md:flex justify-end gap-2">
+					<button
+						type="button"
+						data-trilho="-1"
+						aria-label="Avaliações anteriores"
+						class="flex h-11 w-11 items-center justify-center rounded-full bg-white text-vivah-green ring-1 ring-black/10 hover:bg-vivah-yellow transition [&>svg]:h-5 [&>svg]:w-5"
+					>
+						<Fragment set:html={ChevronLeft} />
+					</button>
+					<button
+						type="button"
+						data-trilho="1"
+						aria-label="Próximas avaliações"
+						class="flex h-11 w-11 items-center justify-center rounded-full bg-white text-vivah-green ring-1 ring-black/10 hover:bg-vivah-yellow transition [&>svg]:h-5 [&>svg]:w-5"
+					>
+						<Fragment set:html={ChevronRight} />
+					</button>
+				</div>
+				<ul
+					id="avaliacoes-trilho"
+					class="no-scrollbar flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-4 px-4 lg:mx-0 lg:px-0"
+				>
+					{
+						avaliacoes.map((a) => (
+							<li class="snap-start shrink-0 w-[86vw] sm:w-[480px]">
+								<figure class="h-full rounded-3xl bg-white p-3 shadow-lg shadow-vivah-green/5 ring-1 ring-black/5">
+									<a href={a.imagem.src} target="_blank" rel="noopener noreferrer" class="block" title="Abrir o print em tamanho real">
+										<Image
+											src={a.imagem}
+											format="png"
+											alt={`Avaliação 5 estrelas de ${a.autor} no Google: ${a.texto}`}
+											class="w-full h-auto rounded-xl"
+										/>
+									</a>
+									<figcaption class="md:hidden px-2 pt-3 text-sm text-vivah-muted">
+										"{a.texto}"
+										<span class="mt-1 block text-xs font-semibold text-vivah-ink">{a.autor}</span>
+									</figcaption>
+								</figure>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const trilho = document.getElementById('avaliacoes-trilho');
+	document.querySelectorAll<HTMLButtonElement>('[data-trilho]').forEach((botao) =>
+		botao.addEventListener('click', () => {
+			if (!trilho) return;
+			trilho.scrollBy({ left: Number(botao.dataset.trilho) * trilho.clientWidth * 0.8, behavior: 'smooth' });
+		})
+	);
+</script>

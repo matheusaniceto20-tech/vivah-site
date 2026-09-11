@@ -2,11 +2,18 @@
 import { negocio, linkWhatsApp } from '../lib/negocio';
 
 const ano = new Date().getFullYear();
+const navegacao = [
+	{ href: '/#como-funciona', label: 'Como funciona' },
+	{ href: '/#simulador', label: 'Simulador' },
+	{ href: '/#projetos', label: 'Projetos' },
+	{ href: '/#avaliacoes', label: 'Avaliações' },
+	{ href: '/blog', label: 'Blog' },
+];
 ---
 
-<footer id="contato" class="bg-vivah-green-dark-2 border-t border-white/10 mt-24">
-	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 grid gap-10 md:grid-cols-3">
-		<div>
+<footer class="bg-vivah-green text-white">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 grid gap-10 md:grid-cols-4">
+		<div class="md:col-span-2">
 			<img
 				src="/brand/logo-vivah-horizontal.svg"
 				alt="Vivah Energia Solar"
@@ -15,10 +22,19 @@ const ano = new Date().getFullYear();
 				class="h-15 w-auto mb-4"
 				loading="lazy"
 			/>
-			<p class="text-white/70 text-sm max-w-xs">
-				Energia solar e elétrica em {negocio.cidade}, com usina própria de geração e
-				atendimento em {negocio.raioAtendimento}.
+			<p class="text-white/70 text-sm max-w-sm">
+				Energia solar e elétrica em {negocio.cidade}, com usina própria de geração e atendimento em
+				{negocio.raioAtendimento}.
 			</p>
+			<a
+				href={negocio.googlePerfilUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mt-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm hover:bg-white/15 transition"
+			>
+				<span class="text-vivah-yellow" aria-hidden="true">★★★★★</span>
+				{negocio.notaGoogle.toFixed(1).replace('.', ',')} no Google
+			</a>
 		</div>
 
 		<div>
@@ -41,16 +57,25 @@ const ano = new Date().getFullYear();
 		<div>
 			<h3 class="font-display font-bold text-vivah-yellow mb-3">Navegação</h3>
 			<ul class="space-y-2 text-sm text-white/80">
-				<li><a href="/#como-funciona" class="hover:text-vivah-yellow">Como funciona</a></li>
-				<li><a href="/#portfolio" class="hover:text-vivah-yellow">Portfólio</a></li>
-				<li><a href="/blog" class="hover:text-vivah-yellow">Blog</a></li>
+				{
+					navegacao.map((item) => (
+						<li>
+							<a href={item.href} class="hover:text-vivah-yellow">
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+				<li>
+					<a href="/privacidade" class="hover:text-vivah-yellow">Política de privacidade</a>
+				</li>
 			</ul>
 		</div>
 	</div>
 
-	<div class="border-t border-white/10 py-5">
+	<div class="border-t border-white/10 py-5 px-4">
 		<p class="text-center text-xs text-white/50">
-			© {ano} {negocio.nome}. Todos os direitos reservados.
+			© {ano} {negocio.razaoSocial} · CNPJ {negocio.cnpj}
 		</p>
 	</div>
 </footer>

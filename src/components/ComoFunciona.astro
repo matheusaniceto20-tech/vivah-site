@@ -1,43 +1,53 @@
 ---
 const passos = [
 	{
-		numero: '01',
-		titulo: 'Você solicita uma visita',
-		texto: 'Chama no WhatsApp e agenda uma visita técnica gratuita, sem compromisso.',
+		titulo: 'Você simula ou chama no WhatsApp',
+		texto: 'Com os dados da sua conta de luz a gente já tem uma primeira ideia do sistema ideal.',
 	},
 	{
-		numero: '02',
-		titulo: 'Fazemos o projeto sob medida',
-		texto: 'Analisamos sua conta de luz e o espaço disponível pra dimensionar o sistema ideal.',
+		titulo: 'Visita técnica e projeto',
+		texto: 'Vamos até o local, conferimos o telhado e o padrão de energia e fechamos o projeto sob medida.',
 	},
 	{
-		numero: '03',
-		titulo: 'Instalamos com equipe própria',
-		texto: 'Equipe especializada faz a instalação com agilidade — projetos simples saem em poucos dias.',
+		titulo: 'Instalação e homologação',
+		texto: 'Equipe especializada instala e a gente cuida de toda a papelada com a distribuidora.',
 	},
 	{
-		numero: '04',
 		titulo: 'Você economiza, a gente acompanha',
 		texto: 'Pós-venda de verdade: acompanhamos a geração e ficamos de prontidão se precisar.',
 	},
 ];
 ---
 
-<section id="como-funciona" class="py-20 md:py-28">
+<section id="como-funciona" class="py-20 md:py-28 bg-white scroll-mt-20">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-		<div class="text-center max-w-2xl mx-auto mb-14">
-			<h2 class="font-display font-extrabold text-3xl md:text-4xl">Como funciona a energia solar</h2>
-			<p class="mt-3 text-white/70">Do primeiro contato até a conta de luz mais leve — simples assim.</p>
+		<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+			<span class="eyebrow">Como funciona</span>
+			<h2 class="titulo-secao">Do primeiro contato à <span class="marker">conta mais leve</span></h2>
+			<p class="mt-4 text-vivah-muted">Um processo simples, com a mesma equipe do começo ao fim.</p>
 		</div>
 
-		<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-			{passos.map((passo) => (
-				<div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-vivah-lime/50 transition-colors">
-					<span class="font-display font-extrabold text-3xl text-vivah-lime">{passo.numero}</span>
-					<h3 class="font-display font-bold text-lg mt-3 mb-2">{passo.titulo}</h3>
-					<p class="text-sm text-white/70">{passo.texto}</p>
-				</div>
-			))}
-		</div>
+		<ol class="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+			<div
+				aria-hidden="true"
+				class="hidden lg:block absolute top-14 left-[12%] right-[12%] border-t-2 border-dashed border-vivah-yellow"
+			>
+			</div>
+			{
+				passos.map((passo, i) => (
+					<li
+						class="relative bg-white rounded-2xl p-6 ring-1 ring-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300"
+						data-reveal
+						style={`--reveal-delay:${i * 120}ms`}
+					>
+						<span class="relative flex h-16 w-16 items-center justify-center rounded-full bg-vivah-yellow font-display font-extrabold text-2xl text-vivah-green shadow-md shadow-vivah-star/30">
+							{i + 1}
+						</span>
+						<h3 class="font-display font-bold text-lg mt-5 mb-2 text-vivah-ink">{passo.titulo}</h3>
+						<p class="text-sm text-vivah-muted">{passo.texto}</p>
+					</li>
+				))
+			}
+		</ol>
 	</div>
 </section>

@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { negocio, linkWhatsApp } from '../lib/negocio';
+---
+
+<Layout
+	title="Política de privacidade"
+	description="Como a Vivah Energia Solar trata os dados enviados pelo site, conforme a LGPD."
+>
+	<section class="py-16 md:py-24 px-4 bg-white">
+		<article class="mx-auto max-w-3xl prose prose-lg prose-headings:font-display prose-headings:text-vivah-ink prose-a:text-vivah-green-700">
+			<h1>Política de privacidade</h1>
+			<p><em>Atualizada em 11 de setembro de 2026.</em></p>
+
+			<p>
+				Esta política explica como a <strong>{negocio.razaoSocial}</strong> (CNPJ {negocio.cnpj}), responsável pela
+				marca {negocio.marca}, trata os dados pessoais enviados por este site, conforme a Lei Geral de Proteção de
+				Dados (Lei 13.709/2018).
+			</p>
+
+			<h2>Quais dados coletamos</h2>
+			<ul>
+				<li><strong>Contato:</strong> nome, WhatsApp, e-mail (opcional) e cidade.</li>
+				<li>
+					<strong>Simulação:</strong> tipo de imóvel e de telhado, consumo e valor da conta de luz, tipo de ligação e,
+					se você enviar, a foto da conta de energia.
+				</li>
+				<li><strong>Mensagens</strong> que você escrever nos formulários.</li>
+			</ul>
+
+			<h2>Pra que usamos</h2>
+			<p>
+				Só pra responder o seu contato, fazer o dimensionamento do sistema solar e enviar o seu orçamento. Não
+				vendemos nem repassamos seus dados pra terceiros com fins comerciais.
+			</p>
+			<p>
+				A base legal é o seu consentimento, dado ao marcar a caixa do formulário, e os procedimentos preliminares de
+				um contrato que você pediu (art. 7º, incisos I e V, da LGPD).
+			</p>
+
+			<h2>Onde os dados ficam</h2>
+			<p>
+				Os envios dos formulários ficam armazenados no Netlify, empresa que hospeda este site, com servidores fora do
+				Brasil. O mapa da página de contato é do Google Maps, e as fontes do site vêm do Google Fonts. Esses serviços
+				seguem suas próprias políticas de privacidade.
+			</p>
+
+			<h2>Por quanto tempo</h2>
+			<p>
+				Enquanto houver conversa ou relação comercial com você. Sem contato por 2 anos, os dados são apagados.
+			</p>
+
+			<h2>Seus direitos</h2>
+			<p>
+				Você pode pedir a qualquer momento pra ver, corrigir ou apagar seus dados, ou retirar o consentimento. É só
+				chamar no <a href={linkWhatsApp('Olá! Quero falar sobre os meus dados enviados pelo site.')}>WhatsApp {negocio.telefone}</a>.
+			</p>
+		</article>
+	</section>
+</Layout>

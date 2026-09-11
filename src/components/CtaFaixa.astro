@@ -1,0 +1,34 @@
+---
+import { linkWhatsApp } from '../lib/negocio';
+---
+
+<section class="relative overflow-hidden bg-vivah-yellow">
+	<div
+		aria-hidden="true"
+		class="absolute -right-20 -top-20 h-72 w-72 rounded-full border-[28px] border-vivah-green/10"
+	>
+	</div>
+	<div
+		aria-hidden="true"
+		class="absolute -left-16 -bottom-24 h-64 w-64 rounded-full border-[24px] border-white/40"
+	>
+	</div>
+
+	<div
+		class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16 md:py-20 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left"
+		data-reveal
+	>
+		<div>
+			<h2 class="font-display font-extrabold text-3xl md:text-4xl text-vivah-green leading-tight">
+				Quanto você economizaria com energia solar?
+			</h2>
+			<p class="mt-2 text-vivah-green/80">Faça a simulação em 1 minuto ou fale direto com a gente.</p>
+		</div>
+		<div class="flex flex-col sm:flex-row gap-3 shrink-0">
+			<a href="#simulador" class="btn btn-verde">Fazer a simulação</a>
+			<a href={linkWhatsApp()} target="_blank" rel="noopener noreferrer" class="btn btn-contorno">
+				Chamar no WhatsApp
+			</a>
+		</div>
+	</div>
+</section>

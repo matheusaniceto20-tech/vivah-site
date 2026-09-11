@@ -2,40 +2,68 @@
 const perguntas = [
 	{
 		pergunta: 'Em quanto tempo o sistema se paga?',
-		resposta: 'O payback costuma ficar entre 2 e 5 anos, dependendo do consumo e do tamanho do sistema. Depois disso, é economia líquida por décadas.',
+		resposta:
+			'Depende do consumo e do tamanho do sistema, mas costuma ficar entre 2 e 5 anos. Depois disso, a economia segue por décadas: os painéis têm garantia de desempenho de 25 anos ou mais.',
 	},
 	{
 		pergunta: 'Funciona em dia nublado ou chuvoso?',
-		resposta: 'Sim. A geração diminui um pouco, mas o sistema continua funcionando. O que sobra de crédito em dias de sol compensa os dias mais fracos.',
+		resposta:
+			'Funciona. A geração cai um pouco, mas o sistema continua produzindo. O que sobra nos dias de sol vira crédito e compensa os dias mais fracos.',
 	},
 	{
-		pergunta: 'Preciso trocar de bateria ou equipamento depois?',
-		resposta: 'Os painéis têm garantia de performance de 25+ anos. O inversor costuma durar de 10 a 15 anos. Fazemos o acompanhamento e avisamos quando algo precisar de atenção.',
+		pergunta: 'Os números do simulador são exatos?',
+		resposta:
+			'São uma estimativa feita com os dados que você informa e com a média de sol de Palmas. O número final sai na visita técnica, quando a gente confere o telhado, a sombra e o padrão de energia.',
 	},
 	{
 		pergunta: 'Tem financiamento?',
-		resposta: 'Sim, ajudamos você a encontrar as melhores condições de financiamento — a instalação costuma caber num valor parecido ou menor que a conta de luz atual.',
+		resposta:
+			'Tem. Ajudamos a encontrar as melhores condições, e em muitos casos a parcela fica parecida ou menor que a conta de luz de hoje.',
 	},
 	{
-		pergunta: 'Atendem só Palmas ou região também?',
-		resposta: 'Atendemos num raio de até 300km de Palmas — não é só a capital.',
+		pergunta: 'O que vocês fazem com os meus dados?',
+		resposta:
+			'Usamos só pra entrar em contato e preparar o seu orçamento. Nada é vendido nem repassado. Os detalhes estão na política de privacidade.',
+		link: { href: '/privacidade', label: 'Ver política de privacidade' },
+	},
+	{
+		pergunta: 'Atendem só Palmas?',
+		resposta: 'Não. Atendemos num raio de até 300km de Palmas.',
 	},
 ];
 ---
 
-<section class="py-20 md:py-28">
+<section class="py-20 md:py-28 bg-white">
 	<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-		<h2 class="font-display font-extrabold text-3xl md:text-4xl text-center mb-12">Perguntas frequentes</h2>
+		<div class="text-center mb-12" data-reveal>
+			<span class="eyebrow">Dúvidas</span>
+			<h2 class="titulo-secao">Perguntas frequentes</h2>
+		</div>
 		<div class="space-y-3">
-			{perguntas.map((item) => (
-				<details class="group bg-white/5 border border-white/10 rounded-xl p-5 open:border-vivah-lime/40">
-					<summary class="flex items-center justify-between cursor-pointer font-semibold list-none">
-						{item.pergunta}
-						<span class="text-vivah-lime group-open:rotate-45 transition-transform text-xl leading-none">+</span>
-					</summary>
-					<p class="mt-3 text-sm text-white/70">{item.resposta}</p>
-				</details>
-			))}
+			{
+				perguntas.map((item, i) => (
+					<details
+						class="group rounded-2xl bg-vivah-mist p-5 ring-1 ring-transparent open:bg-white open:ring-vivah-yellow open:shadow-lg transition"
+						data-reveal
+						style={`--reveal-delay:${i * 60}ms`}
+					>
+						<summary class="flex items-center justify-between gap-4 cursor-pointer font-semibold text-vivah-ink list-none">
+							{item.pergunta}
+							<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-vivah-yellow text-vivah-green text-xl leading-none group-open:rotate-45 transition-transform">
+								+
+							</span>
+						</summary>
+						<p class="mt-3 text-sm text-vivah-muted">
+							{item.resposta}
+							{item.link && (
+								<a href={item.link.href} class="ml-1 font-semibold text-vivah-green-700 underline underline-offset-2">
+									{item.link.label}
+								</a>
+							)}
+						</p>
+					</details>
+				))
+			}
 		</div>
 	</div>
 </section>

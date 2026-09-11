@@ -1,0 +1,96 @@
+---
+import { House, Building2, BatteryCharging, Check } from 'lucide-static';
+import { linkWhatsApp } from '../lib/negocio';
+
+const solucoes = [
+	{
+		icone: House,
+		titulo: 'Residencial',
+		texto: 'Sistema dimensionado pro consumo da sua casa, com acompanhamento da geração pelo celular.',
+		itens: ['Telhado cerâmico, metálico ou laje', 'Homologação com a distribuidora inclusa', 'Pós-venda e acompanhamento'],
+		mensagem: 'Quero um orçamento de energia solar para minha casa.',
+	},
+	{
+		icone: Building2,
+		titulo: 'Empresarial',
+		texto: 'Pra quem tem consumo alto: comércios, galpões e usinas em solo ou carport.',
+		itens: ['Projetos de grande porte', 'Carports e garagens solares', 'Projeto elétrico completo'],
+		mensagem: 'Quero um orçamento de energia solar para minha empresa.',
+	},
+	{
+		icone: BatteryCharging,
+		titulo: 'Off-grid e baterias',
+		destaque: 'Novidade',
+		texto: 'Armazenamento de energia (BESS) e sistemas independentes da rede, com equipe capacitada.',
+		itens: ['Energia mesmo com queda da rede', 'Ideal pra área rural ou sem rede confiável', 'Aproveita melhor a energia gerada de dia'],
+		mensagem: 'Quero saber mais sobre sistemas off-grid e baterias (BESS).',
+	},
+];
+---
+
+<section class="py-20 md:py-28 bg-white">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+			<span class="eyebrow">Soluções</span>
+			<h2 class="titulo-secao">Um sistema pra <span class="marker">cada caso</span></h2>
+			<p class="mt-4 text-vivah-muted">Da casa à propriedade rural, incluindo quem quer independência da rede.</p>
+		</div>
+
+		<div class="grid lg:grid-cols-3 gap-6">
+			{
+				solucoes.map((s, i) => {
+					const escuro = Boolean(s.destaque);
+					return (
+						<div
+							class:list={[
+								'relative flex flex-col rounded-3xl p-8 transition duration-300 hover:-translate-y-1 hover:shadow-2xl',
+								escuro ? 'bg-vivah-green text-white shadow-xl' : 'bg-white ring-1 ring-black/10 shadow-sm',
+							]}
+							data-reveal
+							style={`--reveal-delay:${i * 120}ms`}
+						>
+							{s.destaque && (
+								<span class="absolute right-6 top-6 rounded-full bg-vivah-yellow px-3 py-1 text-xs font-bold text-vivah-green">
+									{s.destaque}
+								</span>
+							)}
+							<span
+								class:list={[
+									'flex h-14 w-14 items-center justify-center rounded-2xl [&>svg]:h-7 [&>svg]:w-7',
+									escuro ? 'bg-vivah-yellow text-vivah-green' : 'bg-vivah-yellow-100 text-vivah-green',
+								]}
+							>
+								<Fragment set:html={s.icone} />
+							</span>
+							<h3 class:list={['font-display font-bold text-2xl mt-5', escuro ? 'text-vivah-yellow' : 'text-vivah-ink']}>{s.titulo}</h3>
+							<p class:list={['mt-2 text-sm', escuro ? 'text-white/80' : 'text-vivah-muted']}>{s.texto}</p>
+							<ul class="mt-5 space-y-2.5 text-sm flex-1">
+								{s.itens.map((item) => (
+									<li class="flex gap-2.5">
+										<span
+											class:list={[
+												'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full [&>svg]:h-3.5 [&>svg]:w-3.5',
+												escuro ? 'bg-vivah-yellow text-vivah-green' : 'bg-vivah-green text-white',
+											]}
+										>
+											<Fragment set:html={Check} />
+										</span>
+										<span class={escuro ? 'text-white/90' : 'text-vivah-ink'}>{item}</span>
+									</li>
+								))}
+							</ul>
+							<a
+								href={linkWhatsApp(s.mensagem)}
+								target="_blank"
+								rel="noopener noreferrer"
+								class:list={['btn mt-7', escuro ? 'btn-amarelo' : 'btn-contorno']}
+							>
+								Pedir orçamento
+							</a>
+						</div>
+					);
+				})
+			}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,38 @@
+---
+import { negocio, anosDeMercado } from '../lib/negocio';
+
+const anos = anosDeMercado();
+const itens = [
+	{ valor: negocio.notaGoogle, casas: 1, sufixo: '', rotulo: 'de nota no Google', estrela: true },
+	{ valor: negocio.avaliacoesGoogle, casas: 0, sufixo: '', rotulo: 'avaliações, todas 5 estrelas' },
+	{ valor: 300, casas: 0, sufixo: ' km', rotulo: 'de raio de atendimento' },
+	{ valor: anos, casas: 0, sufixo: anos === 1 ? ' ano' : ' anos', rotulo: 'de mercado' },
+];
+
+const formatar = (valor: number, casas: number, sufixo: string) =>
+	valor.toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas }) + sufixo;
+---
+
+<section id="numeros" class="relative z-10 -mt-16 px-4 sm:px-6 lg:px-8 scroll-mt-24">
+	<div
+		class="mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-2xl bg-vivah-mist shadow-xl shadow-vivah-green/10 ring-1 ring-black/5"
+	>
+		{
+			itens.map((item, i) => (
+				<div class="bg-white p-5 md:p-7 text-center" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+					<p class="font-display font-extrabold text-3xl md:text-4xl text-vivah-green">
+						<span data-count-to={item.valor} data-count-decimals={item.casas} data-count-suffix={item.sufixo}>
+							{formatar(item.valor, item.casas, item.sufixo)}
+						</span>
+						{item.estrela && (
+							<span class="text-vivah-star" aria-hidden="true">
+								{' '}★
+							</span>
+						)}
+					</p>
+					<p class="mt-1 text-xs md:text-sm text-vivah-muted">{item.rotulo}</p>
+				</div>
+			))
+		}
+	</div>
+</section>

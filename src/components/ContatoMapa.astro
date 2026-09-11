@@ -1,0 +1,98 @@
+---
+import { negocio, linkComoChegar, mapaEmbedUrl } from '../lib/negocio';
+---
+
+<section id="contato" class="py-20 md:py-28 bg-vivah-mist scroll-mt-20">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+		<div data-reveal="left">
+			<span class="eyebrow">Contato</span>
+			<h2 class="titulo-secao">Fale com a <span class="marker">Vivah</span></h2>
+			<p class="mt-4 text-vivah-muted">Deixa seu contato que a gente responde rapidinho, ou chama direto no WhatsApp.</p>
+
+			<form
+				name="orcamento"
+				method="POST"
+				data-netlify="true"
+				netlify-honeypot="bot-field"
+				action="/obrigado"
+				class="mt-8 bg-white rounded-3xl p-6 md:p-8 shadow-xl shadow-vivah-green/5 ring-1 ring-black/5 space-y-4"
+			>
+				<input type="hidden" name="form-name" value="orcamento" />
+				<p class="hidden">
+					<label>Não preencha isso: <input name="bot-field" /></label>
+				</p>
+
+				<div>
+					<label for="contato-nome" class="block text-sm font-semibold mb-1.5">Nome</label>
+					<input type="text" id="contato-nome" name="nome" required autocomplete="name" class="campo" />
+				</div>
+
+				<div class="grid sm:grid-cols-2 gap-4">
+					<div>
+						<label for="contato-telefone" class="block text-sm font-semibold mb-1.5">WhatsApp</label>
+						<input type="tel" id="contato-telefone" name="telefone" required autocomplete="tel" placeholder="(63) 9...." class="campo" />
+					</div>
+					<div>
+						<label for="contato-email" class="block text-sm font-semibold mb-1.5">
+							E-mail <span class="font-normal text-vivah-muted">(opcional)</span>
+						</label>
+						<input type="email" id="contato-email" name="email" autocomplete="email" class="campo" />
+					</div>
+				</div>
+
+				<div>
+					<label for="contato-mensagem" class="block text-sm font-semibold mb-1.5">Mensagem</label>
+					<textarea
+						id="contato-mensagem"
+						name="mensagem"
+						rows="4"
+						placeholder="Conta um pouco sobre o que você precisa"
+						class="campo"
+					></textarea>
+				</div>
+
+				<label class="flex items-start gap-3 text-sm text-vivah-muted">
+					<input type="checkbox" name="consentimento" value="sim" required class="mt-1 h-4 w-4 accent-vivah-green" />
+					<span>
+						Concordo em ser contatado pela Vivah sobre este pedido, conforme a
+						<a href="/privacidade" class="font-semibold text-vivah-green-700 underline underline-offset-2">política de privacidade</a>.
+					</span>
+				</label>
+
+				<button type="submit" class="btn btn-verde w-full">Enviar mensagem</button>
+			</form>
+		</div>
+
+		<div class="lg:sticky lg:top-28" data-reveal="right">
+			<div class="rounded-3xl overflow-hidden bg-white shadow-xl shadow-vivah-green/5 ring-1 ring-black/5">
+				<iframe
+					title="Localização da Vivah no Google Maps"
+					src={mapaEmbedUrl}
+					class="block w-full h-80 md:h-[440px] border-0"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					allowfullscreen
+				></iframe>
+				<div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+					<div>
+						<p class="font-display font-bold text-lg">{negocio.nome}</p>
+						<p class="text-sm text-vivah-muted">{negocio.cidade} · atendimento em {negocio.raioAtendimento}</p>
+					</div>
+					<div class="flex gap-2 shrink-0">
+						<a href={linkComoChegar} target="_blank" rel="noopener noreferrer" class="btn btn-verde !px-5 !py-2.5 text-sm">
+							Como chegar
+						</a>
+						<a
+							href={negocio.googlePerfilUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="btn btn-contorno !px-5 !py-2.5 text-sm"
+						>
+							Ver no Google
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

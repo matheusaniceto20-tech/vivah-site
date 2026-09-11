@@ -1,46 +1,61 @@
 ---
-import { Image } from 'astro:assets';
 import heroPoster from '../assets/brand/hero-poster.jpg';
-import { linkWhatsApp } from '../lib/negocio';
+import { linkWhatsApp, negocio } from '../lib/negocio';
+
+const nota = negocio.notaGoogle.toFixed(1).replace('.', ',');
 ---
 
-<section class="relative h-[92vh] min-h-[560px] w-full overflow-hidden flex items-center">
+<section class="relative min-h-[100svh] w-full overflow-hidden flex items-center pt-20 pb-24">
 	<video
 		class="absolute inset-0 w-full h-full object-cover"
 		autoplay
 		muted
 		loop
 		playsinline
+		preload="metadata"
 		poster={heroPoster.src}
+		aria-hidden="true"
 	>
 		<source src="/videos/hero-usina-naval.mp4" type="video/mp4" />
 	</video>
 
-	<div class="absolute inset-0 bg-gradient-to-t from-vivah-green-dark via-vivah-green-dark/70 to-vivah-green-dark/30"></div>
+	<div class="absolute inset-0 bg-gradient-to-b from-vivah-green/85 via-vivah-green/45 to-vivah-green/90"></div>
 
-	<div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-		<h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl leading-tight">
+	<div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center text-white">
+		<a
+			href="#avaliacoes"
+			class="hero-in inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/25 backdrop-blur px-4 py-1.5 text-sm hover:bg-white/20 transition"
+		>
+			<span class="text-vivah-yellow tracking-wider" aria-hidden="true">★★★★★</span>
+			<span><strong>{nota}</strong> no Google · {negocio.avaliacoesGoogle} avaliações</span>
+		</a>
+
+		<h1
+			class="hero-in [--hero-delay:120ms] mt-6 font-display font-extrabold text-4xl sm:text-5xl md:text-6xl leading-[1.05]"
+		>
 			Transforme o sol em <span class="text-vivah-yellow">economia</span> na sua conta de luz
 		</h1>
-		<p class="mt-5 text-lg md:text-xl text-white/85 max-w-2xl mx-auto">
-			Instalação, manutenção e projetos de energia solar e elétrica em Palmas e região —
-			com usina própria de geração e nota <strong class="text-vivah-yellow">5,0</strong> no Google.
+
+		<p class="hero-in [--hero-delay:240ms] mt-5 text-lg md:text-xl text-white/85 max-w-2xl mx-auto">
+			Instalação, manutenção e projetos de energia solar e elétrica em Palmas e região, com usina própria
+			de geração.
 		</p>
-		<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-			<a
-				href={linkWhatsApp()}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vivah-yellow text-vivah-green-dark font-bold px-7 py-3.5 rounded-full hover:brightness-95 transition"
-			>
-				Solicitar uma visita
-			</a>
-			<a
-				href="#simulador"
-				class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vivah-lime text-vivah-lime font-bold px-7 py-3.5 rounded-full hover:bg-vivah-lime hover:text-vivah-green-dark transition"
-			>
-				Simular minha economia
+
+		<div class="hero-in [--hero-delay:360ms] mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
+			<a href="#simulador" class="btn btn-amarelo w-full sm:w-auto">Simular minha economia</a>
+			<a href={linkWhatsApp()} target="_blank" rel="noopener noreferrer" class="btn btn-claro w-full sm:w-auto">
+				Falar no WhatsApp
 			</a>
 		</div>
 	</div>
+
+	<a
+		href="#numeros"
+		aria-label="Rolar para baixo"
+		class="absolute bottom-20 left-1/2 -ml-4 text-white/70 hover:text-white float"
+	>
+		<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"></path>
+		</svg>
+	</a>
 </section>
