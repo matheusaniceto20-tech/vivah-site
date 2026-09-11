@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import heroPoster from '../assets/brand/hero-poster.jpg';
+import { linkWhatsApp } from '../lib/negocio';
+---
+
+<section class="relative h-[92vh] min-h-[560px] w-full overflow-hidden flex items-center">
+	<video
+		class="absolute inset-0 w-full h-full object-cover"
+		autoplay
+		muted
+		loop
+		playsinline
+		poster={heroPoster.src}
+	>
+		<source src="/videos/hero-drone.mp4" type="video/mp4" />
+	</video>
+
+	<div class="absolute inset-0 bg-gradient-to-t from-vivah-green-dark via-vivah-green-dark/70 to-vivah-green-dark/30"></div>
+
+	<div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+		<h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl leading-tight">
+			Transforme o sol em <span class="text-vivah-yellow">economia</span> na sua conta de luz
+		</h1>
+		<p class="mt-5 text-lg md:text-xl text-white/85 max-w-2xl mx-auto">
+			Instalação, manutenção e projetos de energia solar e elétrica em Palmas e região —
+			com usina própria de geração e nota <strong class="text-vivah-yellow">5,0</strong> no Google.
+		</p>
+		<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+			<a
+				href={linkWhatsApp()}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vivah-yellow text-vivah-green-dark font-bold px-7 py-3.5 rounded-full hover:brightness-95 transition"
+			>
+				Solicitar uma visita
+			</a>
+			<a
+				href="#simulador"
+				class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-vivah-lime text-vivah-lime font-bold px-7 py-3.5 rounded-full hover:bg-vivah-lime hover:text-vivah-green-dark transition"
+			>
+				Simular minha economia
+			</a>
+		</div>
+	</div>
+</section>

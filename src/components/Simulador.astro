@@ -1,0 +1,77 @@
+---
+import { linkWhatsApp } from '../lib/negocio';
+---
+
+<section id="simulador" class="py-20 md:py-28 bg-vivah-green-dark-2">
+	<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+		<h2 class="font-display font-extrabold text-3xl md:text-4xl">Quanto você pode economizar?</h2>
+		<p class="mt-3 text-white/70">
+			Digita o valor médio da sua conta de luz e veja uma estimativa de economia com energia solar.
+		</p>
+
+		<form id="simulador-form" class="mt-10 bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 text-left">
+			<label for="conta" class="block text-sm font-medium text-white/80 mb-2">
+				Valor médio da sua conta de luz (R$)
+			</label>
+			<input
+				type="number"
+				id="conta"
+				name="conta"
+				min="0"
+				step="1"
+				placeholder="Ex: 450"
+				class="w-full rounded-xl bg-vivah-green-dark border border-white/20 px-4 py-3 text-lg focus:outline-none focus:border-vivah-lime"
+				required
+			/>
+
+			<button
+				type="submit"
+				class="mt-4 w-full bg-vivah-yellow text-vivah-green-dark font-bold px-6 py-3.5 rounded-full hover:brightness-95 transition"
+			>
+				Calcular minha economia
+			</button>
+
+			<div id="resultado" hidden class="mt-6 grid sm:grid-cols-2 gap-4 text-center">
+				<div class="bg-vivah-green-dark rounded-xl p-4 border border-vivah-lime/40">
+					<p class="text-xs text-white/60 uppercase tracking-wide">Economia estimada/mês</p>
+					<p class="font-display font-extrabold text-2xl text-vivah-lime mt-1" id="resultado-economia">—</p>
+				</div>
+				<div class="bg-vivah-green-dark rounded-xl p-4 border border-vivah-yellow/40">
+					<p class="text-xs text-white/60 uppercase tracking-wide">Economia estimada/ano</p>
+					<p class="font-display font-extrabold text-2xl text-vivah-yellow mt-1" id="resultado-economia-ano">—</p>
+				</div>
+			</div>
+
+			<p id="resultado-cta" hidden class="text-center text-sm text-white/70 mt-5">
+				Estimativa aproximada. Pra um número exato, <a href={linkWhatsApp('Fiz a simulação no site e quero um orçamento exato.')} target="_blank" rel="noopener noreferrer" class="text-vivah-yellow font-semibold underline underline-offset-2">peça um orçamento sem compromisso</a>.
+			</p>
+		</form>
+	</div>
+</section>
+
+<script>
+	const form = document.getElementById('simulador-form') as HTMLFormElement | null;
+	const resultado = document.getElementById('resultado');
+	const resultadoCta = document.getElementById('resultado-cta');
+	const economiaEl = document.getElementById('resultado-economia');
+	const economiaAnoEl = document.getElementById('resultado-economia-ano');
+
+	const formatBRL = (valor: number) =>
+		valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+
+	form?.addEventListener('submit', (event) => {
+		event.preventDefault();
+		const input = document.getElementById('conta') as HTMLInputElement | null;
+		const valor = Number(input?.value ?? 0);
+		if (!valor || valor <= 0) return;
+
+		// Estimativa conservadora: até 80% de economia mensal, conforme material da Vivah.
+		const economiaMensal = valor * 0.8;
+		const economiaAnual = economiaMensal * 12;
+
+		if (economiaEl) economiaEl.textContent = formatBRL(economiaMensal);
+		if (economiaAnoEl) economiaAnoEl.textContent = formatBRL(economiaAnual);
+		resultado?.removeAttribute('hidden');
+		resultadoCta?.removeAttribute('hidden');
+	});
+</script>

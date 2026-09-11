@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { linkWhatsApp } from '../../lib/negocio';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog', ({ data }) => !data.draft);
+	return posts.map((post) => ({
+		params: { id: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+	<article class="py-20 md:py-28">
+		<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+			<a href="/blog" class="text-sm text-white/60 hover:text-vivah-yellow">← Voltar pro blog</a>
+
+			<p class="text-xs text-white/50 mt-6 mb-2">
+				{post.data.publishedAt.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+				· {post.data.author}
+			</p>
+			<h1 class="font-display font-extrabold text-3xl md:text-4xl mb-8">{post.data.title}</h1>
+
+			<div class="prose prose-invert prose-headings:font-display max-w-none">
+				<Content />
+			</div>
+
+			<div class="mt-14 bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+				<p class="mb-4 text-white/80">Ficou com alguma dúvida sobre o seu caso?</p>
+				<a
+					href={linkWhatsApp(`Li o artigo "${post.data.title}" e quero saber mais.`)}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 bg-vivah-yellow text-vivah-green-dark font-bold px-6 py-3 rounded-full hover:brightness-95 transition"
+				>
+					Falar no WhatsApp
+				</a>
+			</div>
+		</div>
+	</article>
+</Layout>

@@ -1,0 +1,27 @@
+---
+import { negocio } from '../lib/negocio';
+---
+
+<section id="diferenciais" class="py-20 md:py-28 bg-vivah-green-dark-2">
+	<div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+		<h2 class="font-display font-extrabold text-3xl md:text-4xl">
+			O que diferencia a <span class="text-vivah-yellow">Vivah</span>
+		</h2>
+		<div class="mt-12 grid sm:grid-cols-2 gap-6 text-left">
+			<div class="bg-vivah-green-dark rounded-2xl p-7 border border-vivah-lime/30">
+				<h3 class="font-display font-bold text-xl text-vivah-lime mb-2">Usina própria de geração</h3>
+				<p class="text-white/75 text-sm">
+					Diferente de quem só instala, a Vivah tem usina própria pra distribuição de energia —
+					mais controle sobre qualidade e prazo, do projeto à entrega.
+				</p>
+			</div>
+			<div class="bg-vivah-green-dark rounded-2xl p-7 border border-vivah-yellow/30">
+				<h3 class="font-display font-bold text-xl text-vivah-yellow mb-2">Atendimento regional</h3>
+				<p class="text-white/75 text-sm">
+					Atendemos {negocio.raioAtendimento} — não é só a capital. Se você tá no Tocantins ou
+					região, a gente chega.
+				</p>
+			</div>
+		</div>
+	</div>
+</section>

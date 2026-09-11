@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+---
+
+<Layout title="Blog" description="Artigos sobre energia solar, economia e sustentabilidade — Vivah Energia Solar.">
+	<section class="py-20 md:py-28">
+		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+			<h1 class="font-display font-extrabold text-4xl mb-3">Blog</h1>
+			<p class="text-white/70 mb-12">Conteúdo sobre energia solar, economia e sustentabilidade.</p>
+
+			<div class="space-y-6">
+				{posts.map((post) => (
+					<a href={`/blog/${post.id}`} class="block bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-vivah-lime/40 transition-colors">
+						<p class="text-xs text-white/50 mb-2">
+							{post.data.publishedAt.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+						</p>
+						<h2 class="font-display font-bold text-xl mb-2">{post.data.title}</h2>
+						<p class="text-white/70 text-sm">{post.data.description}</p>
+					</a>
+				))}
+
+				{posts.length === 0 && (
+					<p class="text-white/60">Ainda não temos artigos publicados. Em breve!</p>
+				)}
+			</div>
+		</div>
+	</section>
+</Layout>

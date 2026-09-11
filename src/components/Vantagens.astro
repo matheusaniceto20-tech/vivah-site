@@ -1,0 +1,28 @@
+---
+const vantagens = [
+	{ icone: '⚡', titulo: 'Economia de até 80%', texto: 'Reduza sua conta de luz mensal com um sistema dimensionado sob medida.' },
+	{ icone: '🌱', titulo: 'Energia limpa', texto: 'Energia solar é renovável, silenciosa e reduz sua pegada de carbono.' },
+	{ icone: '🏠', titulo: 'Valorização do imóvel', texto: 'Imóveis com energia solar instalada se valorizam no mercado.' },
+	{ icone: '📝', titulo: 'Sem burocracia', texto: 'A gente cuida de todo o processo de homologação junto à distribuidora.' },
+	{ icone: '☀️', titulo: 'Usina própria', texto: 'Diferencial da Vivah: temos usina própria de geração solar.' },
+	{ icone: '🤝', titulo: 'Pós-venda de verdade', texto: 'Acompanhamos a geração do seu sistema — não somem depois da venda.' },
+];
+---
+
+<section class="py-20 md:py-28">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="text-center max-w-2xl mx-auto mb-14">
+			<h2 class="font-display font-extrabold text-3xl md:text-4xl">Vantagens da energia solar</h2>
+		</div>
+
+		<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+			{vantagens.map((v) => (
+				<div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+					<span class="text-3xl">{v.icone}</span>
+					<h3 class="font-display font-bold text-lg mt-3 mb-2">{v.titulo}</h3>
+					<p class="text-sm text-white/70">{v.texto}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>

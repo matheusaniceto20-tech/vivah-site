@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { linkWhatsApp } from '../lib/negocio';
+---
+
+<Layout title="Obrigado" description="Recebemos seu pedido de orçamento.">
+	<section class="py-32 text-center px-4">
+		<h1 class="font-display font-extrabold text-4xl mb-4">Recebemos sua mensagem! 🎉</h1>
+		<p class="text-white/75 max-w-md mx-auto">
+			Obrigado pelo contato. A equipe da Vivah vai te responder em breve. Se preferir, já chama
+			a gente no WhatsApp agora mesmo.
+		</p>
+		<a
+			href={linkWhatsApp()}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="mt-8 inline-flex items-center gap-2 bg-vivah-yellow text-vivah-green-dark font-bold px-7 py-3.5 rounded-full hover:brightness-95 transition"
+		>
+			Chamar no WhatsApp
+		</a>
+		<div class="mt-6">
+			<a href="/" class="text-sm text-white/60 hover:text-vivah-yellow underline underline-offset-2">Voltar pro site</a>
+		</div>
+	</section>
+</Layout>

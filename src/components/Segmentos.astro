@@ -1,0 +1,41 @@
+---
+import { linkWhatsApp } from '../lib/negocio';
+
+const segmentos = [
+	{
+		titulo: 'Residencial',
+		texto: 'Reduza a conta de luz da sua casa com um sistema dimensionado pro seu consumo real.',
+		icone: '🏡',
+	},
+	{
+		titulo: 'Empresarial',
+		texto: 'Empresas com alto consumo economizam ainda mais — projeto sob medida pro seu negócio.',
+		icone: '🏢',
+	},
+];
+---
+
+<section class="py-20 md:py-28 bg-vivah-green-dark-2">
+	<div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+		<div class="text-center max-w-2xl mx-auto mb-14">
+			<h2 class="font-display font-extrabold text-3xl md:text-4xl">Quem a Vivah atende</h2>
+		</div>
+		<div class="grid sm:grid-cols-2 gap-6">
+			{segmentos.map((s) => (
+				<a
+					href={linkWhatsApp(`Quero um orçamento ${s.titulo.toLowerCase()}.`)}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group bg-vivah-green-dark rounded-2xl p-8 border border-white/10 hover:border-vivah-yellow/60 transition-colors text-center"
+				>
+					<span class="text-5xl">{s.icone}</span>
+					<h3 class="font-display font-bold text-2xl mt-4 mb-2">{s.titulo}</h3>
+					<p class="text-white/70 text-sm">{s.texto}</p>
+					<span class="inline-block mt-4 text-vivah-yellow text-sm font-semibold group-hover:underline">
+						Solicitar orçamento →
+					</span>
+				</a>
+			))}
+		</div>
+	</div>
+</section>

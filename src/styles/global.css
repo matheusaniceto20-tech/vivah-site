@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Identidade Vivah — ver /identidade/design-guide.md */
+  --color-vivah-green-dark: #0f2e16;
+  --color-vivah-green-dark-2: #123319;
+  --color-vivah-lime: #97d700;
+  --color-vivah-yellow: #f5e400;
+  --color-vivah-white: #ffffff;
+
+  --font-display: "Baloo 2", "Poppins", ui-rounded, system-ui, sans-serif;
+  --font-body: "Poppins", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-vivah-green-dark);
+  color: var(--color-vivah-white);
+  font-family: var(--font-body);
+}

@@ -1,0 +1,44 @@
+---
+import { linkWhatsApp } from '../lib/negocio';
+
+const beneficios = [
+	'Autonomia mesmo em quedas de energia da rede',
+	'Ideal pra zona rural ou áreas sem rede elétrica confiável',
+	'Aproveita ao máximo a energia gerada durante o dia',
+	'Equipe capacitada e treinada em sistemas de armazenamento (BESS)',
+];
+---
+
+<section class="py-20 md:py-28">
+	<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+		<div>
+			<span class="inline-block text-xs font-bold uppercase tracking-wide text-vivah-lime bg-vivah-lime/10 px-3 py-1 rounded-full mb-4">
+				Novidade
+			</span>
+			<h2 class="font-display font-extrabold text-3xl md:text-4xl">
+				Sistemas <span class="text-vivah-yellow">off-grid</span> e armazenamento de energia (BESS)
+			</h2>
+			<p class="mt-4 text-white/75">
+				Além da instalação convencional, a Vivah já é capacitada pra montar sistemas de
+				armazenamento de energia (BESS) e soluções off-grid — pra quem quer independência
+				total da rede elétrica, seja por localização ou por segurança de fornecimento.
+			</p>
+			<a
+				href={linkWhatsApp('Quero saber mais sobre sistemas BESS / off-grid.')}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mt-6 inline-flex items-center gap-2 bg-vivah-yellow text-vivah-green-dark font-bold px-6 py-3 rounded-full hover:brightness-95 transition"
+			>
+				Falar sobre um projeto off-grid
+			</a>
+		</div>
+		<ul class="space-y-4">
+			{beneficios.map((b) => (
+				<li class="flex items-start gap-3 bg-white/5 border border-white/10 rounded-xl p-4">
+					<span class="text-vivah-lime font-bold">✓</span>
+					<span class="text-white/85 text-sm">{b}</span>
+				</li>
+			))}
+		</ul>
+	</div>
+</section>

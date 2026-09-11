@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import p1 from '../assets/portfolio/portfolio-1.jpg';
+import p2 from '../assets/portfolio/portfolio-2.jpg';
+import p3 from '../assets/portfolio/portfolio-3-naval.jpg';
+import p4 from '../assets/portfolio/portfolio-4-naval.jpg';
+import p6 from '../assets/portfolio/portfolio-6-equipe.jpg';
+
+const fotos = [
+	{ src: p1, alt: 'Painéis solares instalados em residência pela Vivah' },
+	{ src: p2, alt: 'Instalação de painéis solares em residência' },
+	{ src: p6, alt: 'Equipe Vivah em campo, preparando painéis pra instalação' },
+	{ src: p3, alt: 'Obra do projeto Naval, às margens do rio em Caseara (TO)' },
+	{ src: p4, alt: 'Estrutura em montagem do projeto Naval, com vista pro rio' },
+];
+---
+
+<section id="portfolio" class="py-20 md:py-28">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="text-center max-w-2xl mx-auto mb-4">
+			<h2 class="font-display font-extrabold text-3xl md:text-4xl">Nossos projetos</h2>
+			<p class="mt-3 text-white/70">
+				Da residência à indústria — incluindo a obra em andamento na <strong class="text-vivah-yellow">Naval</strong>,
+				empresa de balsas em Caseara (TO).
+			</p>
+		</div>
+
+		<div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4">
+			{fotos.map((foto, i) => (
+				<div class:list={["overflow-hidden rounded-2xl", i === 0 && "col-span-2 row-span-2"]}>
+					<Image
+						src={foto.src}
+						alt={foto.alt}
+						class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+						widths={[400, 800, 1200]}
+						sizes="(min-width: 768px) 33vw, 50vw"
+					/>
+				</div>
+			))}
+		</div>
+	</div>
+</section>

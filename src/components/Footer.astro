@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo.jpg';
+import { negocio, linkWhatsApp } from '../lib/negocio';
+
+const ano = new Date().getFullYear();
+---
+
+<footer id="contato" class="bg-vivah-green-dark-2 border-t border-white/10 mt-24">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 grid gap-10 md:grid-cols-3">
+		<div>
+			<div class="flex items-center gap-2 mb-3">
+				<Image src={logo} alt="Vivah Energia Solar" width={36} height={36} class="rounded-md" />
+				<span class="font-display font-extrabold text-lg">VIVAH</span>
+			</div>
+			<p class="text-white/70 text-sm max-w-xs">
+				Energia solar e elétrica em {negocio.cidade}, com usina própria de geração e
+				atendimento em {negocio.raioAtendimento}.
+			</p>
+		</div>
+
+		<div>
+			<h3 class="font-display font-bold text-vivah-yellow mb-3">Contato</h3>
+			<ul class="space-y-2 text-sm text-white/80">
+				<li>
+					<a href={linkWhatsApp()} target="_blank" rel="noopener noreferrer" class="hover:text-vivah-yellow">
+						WhatsApp: {negocio.telefone}
+					</a>
+				</li>
+				<li>
+					<a href={negocio.instagramUrl} target="_blank" rel="noopener noreferrer" class="hover:text-vivah-yellow">
+						Instagram: {negocio.instagram}
+					</a>
+				</li>
+				<li>{negocio.cidade}</li>
+			</ul>
+		</div>
+
+		<div>
+			<h3 class="font-display font-bold text-vivah-yellow mb-3">Navegação</h3>
+			<ul class="space-y-2 text-sm text-white/80">
+				<li><a href="/#como-funciona" class="hover:text-vivah-yellow">Como funciona</a></li>
+				<li><a href="/#portfolio" class="hover:text-vivah-yellow">Portfólio</a></li>
+				<li><a href="/blog" class="hover:text-vivah-yellow">Blog</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="border-t border-white/10 py-5">
+		<p class="text-center text-xs text-white/50">
+			© {ano} {negocio.nome}. Todos os direitos reservados.
+		</p>
+	</div>
+</footer>
