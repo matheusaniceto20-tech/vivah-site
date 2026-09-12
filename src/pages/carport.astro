@@ -4,9 +4,11 @@ import { Image } from 'astro:assets';
 import { Image as ImageIcon, CarFront, Sun, Ruler, Wallet, Leaf, ChevronDown } from 'lucide-static';
 import { linkWhatsApp } from '../lib/negocio';
 import { projetos } from '../data/projetos';
+import carportPoster from '../assets/brand/carport-poster.jpg';
+import carregador1 from '../assets/projetos/naval-carregador/01.jpg';
+import carregador2 from '../assets/projetos/naval-carregador/02.jpg';
 
 const carports = projetos.filter((p) => p.categoria === 'carport');
-const capa = carports[0]?.fotos[0];
 
 const beneficios = [
 	{ icone: CarFront, titulo: 'Protege os veículos', texto: 'Sol, chuva e granizo não chegam nos carros embaixo da estrutura.' },
@@ -43,17 +45,18 @@ const faq = [
 	heroHeader
 >
 	<section class="relative min-h-[70vh] flex items-end pt-24 pb-16 overflow-hidden">
-		{
-			capa && (
-				<Image
-					src={capa}
-					alt="Carport com painéis solares instalado pela Vivah"
-					widths={[800, 1600]}
-					sizes="100vw"
-					class="absolute inset-0 w-full h-full object-cover"
-				/>
-			)
-		}
+		<video
+			class="absolute inset-0 w-full h-full object-cover"
+			autoplay
+			muted
+			loop
+			playsinline
+			preload="metadata"
+			poster={carportPoster.src}
+			aria-hidden="true"
+		>
+			<source src="/videos/carport-naval.mp4" type="video/mp4" />
+		</video>
 		<div class="absolute inset-0 bg-gradient-to-t from-vivah-green via-vivah-green/70 to-vivah-green/30"></div>
 		<div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-white">
 			<span class="eyebrow !bg-white/10 !text-vivah-yellow">Carport solar</span>
@@ -89,6 +92,46 @@ const faq = [
 						</div>
 					))
 				}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-vivah-green text-white">
+		<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+			<div data-reveal="left">
+				<span class="eyebrow !bg-white/10 !text-vivah-yellow">Caso real</span>
+				<h2 class="font-display font-extrabold text-3xl md:text-4xl leading-tight">
+					Carport com <span class="text-vivah-yellow">carregador de carro elétrico</span>
+				</h2>
+				<p class="mt-4 text-white/85">
+					No projeto da Naval, em Caseara, instalamos um sistema dedicado de <strong class="text-vivah-yellow">8 placas
+					solares</strong> só pra abastecer um ponto de recarga de veículo elétrico — o carport gera a energia
+					que carrega o carro, sem pesar na conta de luz do resto da instalação.
+				</p>
+				<a
+					href={linkWhatsApp('Quero um orçamento de carport com carregador de carro elétrico.')}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="btn btn-amarelo mt-6"
+				>
+					Quero um carregador solar
+				</a>
+			</div>
+			<div class="grid grid-cols-2 gap-4" data-reveal="right">
+				<Image
+					src={carregador2}
+					alt="Estrutura do carport dedicado ao carregador de carro elétrico, em construção"
+					widths={[400, 700]}
+					sizes="25vw"
+					class="col-span-2 w-full aspect-[16/10] object-cover rounded-2xl"
+				/>
+				<Image
+					src={carregador1}
+					alt="Ponto de recarga de carro elétrico instalado pela Vivah"
+					widths={[400, 700]}
+					sizes="25vw"
+					class="col-span-2 w-full aspect-[16/10] object-cover rounded-2xl"
+				/>
 			</div>
 		</div>
 	</section>
