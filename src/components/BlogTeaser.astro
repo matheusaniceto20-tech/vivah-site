@@ -25,7 +25,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 					{posts.map((post, i) => (
 						<a
 							href={`/blog/${post.id}`}
-							class="block rounded-3xl bg-white p-6 ring-1 ring-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:ring-vivah-yellow transition duration-300"
+							class="cartao-painel block rounded-3xl bg-white p-6 ring-1 ring-black/5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:ring-vivah-yellow transition duration-300"
 							data-reveal
 							style={`--reveal-delay:${i * 100}ms`}
 						>

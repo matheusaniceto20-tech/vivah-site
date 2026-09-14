@@ -227,6 +227,56 @@ body {
   }
 }
 
+/* cartão com cara de painel elétrico: 4 rebites nos cantos, tipo placa aparafusada */
+@utility cartao-painel {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    background-image:
+      radial-gradient(circle, color-mix(in srgb, var(--color-vivah-green) 50%, transparent) 1.6px, transparent 1.8px),
+      radial-gradient(circle, color-mix(in srgb, var(--color-vivah-green) 50%, transparent) 1.6px, transparent 1.8px),
+      radial-gradient(circle, color-mix(in srgb, var(--color-vivah-green) 50%, transparent) 1.6px, transparent 1.8px),
+      radial-gradient(circle, color-mix(in srgb, var(--color-vivah-green) 50%, transparent) 1.6px, transparent 1.8px);
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position:
+      10px 10px,
+      calc(100% - 10px) 10px,
+      10px calc(100% - 10px),
+      calc(100% - 10px) calc(100% - 10px);
+  }
+}
+
+/* mesma ideia, mas rebite branco — pra cartões sobre fundo escuro */
+@utility cartao-painel-escuro {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    background-image:
+      radial-gradient(circle, color-mix(in srgb, white 45%, transparent) 1.6px, transparent 1.8px),
+      radial-gradient(circle, color-mix(in srgb, white 45%, transparent) 1.6px, transparent 1.8px),
+      radial-gradient(circle, color-mix(in srgb, white 45%, transparent) 1.6px, transparent 1.8px),
+      radial-gradient(circle, color-mix(in srgb, white 45%, transparent) 1.6px, transparent 1.8px);
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position:
+      10px 10px,
+      calc(100% - 10px) 10px,
+      10px calc(100% - 10px),
+      calc(100% - 10px) calc(100% - 10px);
+  }
+}
+
 /* barra fininha com energia "fluindo" — usada acima da faixa de números */
 .barra-energia {
   height: 3px;

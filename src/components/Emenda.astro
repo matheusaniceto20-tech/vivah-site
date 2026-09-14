@@ -1,0 +1,21 @@
+---
+// Emenda de circuito: nozinho que "solda" duas seções, reforçando o ar de
+// esquema elétrico entre blocos do site. cimaClaro/baixoClaro dizem se o
+// fundo logo acima/abaixo da emenda é claro (fio em verde escuro) ou
+// escuro (fio em branco) — cada perna do fio se adapta ao lado que toca.
+interface Props {
+	cimaClaro?: boolean;
+	baixoClaro?: boolean;
+}
+const { cimaClaro = true, baixoClaro = true } = Astro.props;
+const fioCima = cimaClaro ? 'bg-vivah-green/25' : 'bg-white/30';
+const fioBaixo = baixoClaro ? 'bg-vivah-green/25' : 'bg-white/30';
+---
+
+<div class="relative z-10 -my-8 flex justify-center" aria-hidden="true">
+	<div class="flex flex-col items-center">
+		<span class={`h-8 w-px ${fioCima}`}></span>
+		<span class="icone-vivo h-3 w-3 shrink-0 rounded-full bg-vivah-yellow"></span>
+		<span class={`h-8 w-px ${fioBaixo}`}></span>
+	</div>
+</div>

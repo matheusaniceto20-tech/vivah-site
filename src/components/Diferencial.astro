@@ -61,7 +61,7 @@ const itens = [
 			<div class="mt-8 grid sm:grid-cols-2 gap-4">
 				{
 					itens.map((item, i) => (
-						<div class:list={["flex gap-4 rounded-2xl bg-white/5 p-5 ring-1 ring-white/10", i === 0 && "sm:col-span-2"]}>
+						<div class:list={["cartao-painel-escuro flex gap-4 rounded-2xl bg-white/5 p-5 ring-1 ring-white/10", i === 0 && "sm:col-span-2"]}>
 							<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-vivah-yellow text-vivah-green [&>svg]:h-6 [&>svg]:w-6">
 								<Fragment set:html={item.icone} />
 							</span>
