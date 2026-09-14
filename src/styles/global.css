@@ -201,7 +201,8 @@ body {
   }
 }
 
-/* halo tipo corona solar, pulsando atrás de badges de ícone */
+/* halo tipo corona solar, pulsando atrás de badges de ícone — mais o LED
+   vermelho de status, tipo painel de inversor ligado */
 @utility icone-vivo {
   position: relative;
   &::after {
@@ -213,6 +214,31 @@ body {
     background: radial-gradient(circle, color-mix(in srgb, var(--color-vivah-yellow) 55%, transparent), transparent 70%);
     opacity: 0;
     animation: vivah-corona 3.4s ease-in-out infinite;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    z-index: 2;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #ef4444;
+    box-shadow: 0 0 0 2px color-mix(in srgb, white 70%, transparent);
+    animation: vivah-led 2.2s ease-in-out infinite;
+  }
+}
+
+@keyframes vivah-led {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 2px color-mix(in srgb, white 70%, transparent), 0 0 4px 1px color-mix(in srgb, #ef4444 70%, transparent);
+  }
+  50% {
+    opacity: 0.4;
+    box-shadow: 0 0 0 2px color-mix(in srgb, white 70%, transparent), 0 0 0 0 transparent;
   }
 }
 
@@ -228,9 +254,12 @@ body {
   }
 }
 
-/* cartão com cara de painel elétrico: 4 rebites nos cantos, tipo placa aparafusada,
-   mais 4 pontas de eletroduto que se encontram com as do card vizinho no meio do
-   vão (gap-6 = 24px — cada ponta avança metade disso, 12px, pro vão) */
+/* cartão com cara de painel de inversor: rebites nos cantos + aletas de
+   dissipador na base (textura de chassi metálico), mais 4 pontas de
+   eletroduto GALVANIZADO (cinza, com sombreamento de cilindro) que se
+   encontram com as do card vizinho no meio do vão (gap-6 = 24px — cada
+   ponta avança metade disso, 12px), com um par de fios vermelho/preto
+   saindo junto do eletroduto de cima — igual instalação de verdade */
 @utility cartao-painel {
   position: relative;
   &::before {
@@ -240,18 +269,25 @@ body {
     z-index: 1;
     pointer-events: none;
     border-radius: inherit;
+    background-repeat: no-repeat;
     background-image:
       radial-gradient(circle, color-mix(in srgb, var(--color-vivah-green) 50%, transparent) 1.6px, transparent 1.8px),
       radial-gradient(circle, color-mix(in srgb, var(--color-vivah-green) 50%, transparent) 1.6px, transparent 1.8px),
       radial-gradient(circle, color-mix(in srgb, var(--color-vivah-green) 50%, transparent) 1.6px, transparent 1.8px),
-      radial-gradient(circle, color-mix(in srgb, var(--color-vivah-green) 50%, transparent) 1.6px, transparent 1.8px);
-    background-repeat: no-repeat;
-    background-size: 16px 16px;
+      radial-gradient(circle, color-mix(in srgb, var(--color-vivah-green) 50%, transparent) 1.6px, transparent 1.8px),
+      repeating-linear-gradient(90deg, color-mix(in srgb, #52525b 40%, transparent) 0 2px, transparent 2px 7px);
+    background-size:
+      16px 16px,
+      16px 16px,
+      16px 16px,
+      16px 16px,
+      100% 8px;
     background-position:
       10px 10px,
       calc(100% - 10px) 10px,
       10px calc(100% - 10px),
-      calc(100% - 10px) calc(100% - 10px);
+      calc(100% - 10px) calc(100% - 10px),
+      bottom center;
   }
   &::after {
     content: "";
@@ -261,25 +297,31 @@ body {
     pointer-events: none;
     background-repeat: no-repeat;
     background-image:
-      linear-gradient(color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent), color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent)),
-      linear-gradient(color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent), color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent)),
-      linear-gradient(color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent), color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent)),
-      linear-gradient(color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent), color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent));
+      linear-gradient(to right, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(to right, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(to bottom, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(to bottom, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(#dc2626, #dc2626),
+      linear-gradient(#18181b, #18181b);
     background-size:
-      3px 13px,
-      3px 13px,
-      13px 3px,
-      13px 3px;
+      6px 13px,
+      6px 13px,
+      13px 6px,
+      13px 6px,
+      1.5px 11px,
+      1.5px 11px;
     background-position:
       top center,
       bottom center,
       center left,
-      center right;
+      center right,
+      calc(50% - 5px) top,
+      calc(50% + 5px) top;
   }
 }
 
-/* mesma ideia, mas rebite branco — pra cartões sobre fundo escuro (as pontas
-   de eletroduto continuam amarelas — é a mesma "fiação" do site inteiro) */
+/* mesma ideia, mas rebite e aleta em branco — pra cartões sobre fundo
+   escuro (o eletroduto continua cinza metálico, com o mesmo par de fios) */
 @utility cartao-painel-escuro {
   position: relative;
   &::before {
@@ -289,18 +331,25 @@ body {
     z-index: 1;
     pointer-events: none;
     border-radius: inherit;
+    background-repeat: no-repeat;
     background-image:
       radial-gradient(circle, color-mix(in srgb, white 45%, transparent) 1.6px, transparent 1.8px),
       radial-gradient(circle, color-mix(in srgb, white 45%, transparent) 1.6px, transparent 1.8px),
       radial-gradient(circle, color-mix(in srgb, white 45%, transparent) 1.6px, transparent 1.8px),
-      radial-gradient(circle, color-mix(in srgb, white 45%, transparent) 1.6px, transparent 1.8px);
-    background-repeat: no-repeat;
-    background-size: 16px 16px;
+      radial-gradient(circle, color-mix(in srgb, white 45%, transparent) 1.6px, transparent 1.8px),
+      repeating-linear-gradient(90deg, color-mix(in srgb, white 22%, transparent) 0 2px, transparent 2px 7px);
+    background-size:
+      16px 16px,
+      16px 16px,
+      16px 16px,
+      16px 16px,
+      100% 8px;
     background-position:
       10px 10px,
       calc(100% - 10px) 10px,
       10px calc(100% - 10px),
-      calc(100% - 10px) calc(100% - 10px);
+      calc(100% - 10px) calc(100% - 10px),
+      bottom center;
   }
   &::after {
     content: "";
@@ -310,20 +359,79 @@ body {
     pointer-events: none;
     background-repeat: no-repeat;
     background-image:
-      linear-gradient(color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent), color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent)),
-      linear-gradient(color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent), color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent)),
-      linear-gradient(color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent), color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent)),
-      linear-gradient(color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent), color-mix(in srgb, var(--color-vivah-yellow) 70%, transparent));
+      linear-gradient(to right, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(to right, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(to bottom, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(to bottom, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(#dc2626, #dc2626),
+      linear-gradient(#18181b, #18181b);
     background-size:
-      3px 13px,
-      3px 13px,
-      13px 3px,
-      13px 3px;
+      6px 13px,
+      6px 13px,
+      13px 6px,
+      13px 6px,
+      1.5px 11px,
+      1.5px 11px;
     background-position:
       top center,
       bottom center,
       center left,
-      center right;
+      center right,
+      calc(50% - 5px) top,
+      calc(50% + 5px) top;
+  }
+}
+
+/* variação de card pra não repetir sempre a mesma "pele": em vez de painel
+   de inversor, um recorte de placa solar — célula em grade, vidro com
+   reflexo, moldura de alumínio — mas com as MESMAS pontas de eletroduto
+   cinza se conectando aos vizinhos, pra manter a linha contínua no grid */
+@utility cartao-placa-solar {
+  position: relative;
+  background:
+    linear-gradient(115deg, transparent 42%, rgb(255 255 255 / 0.16) 50%, transparent 58%),
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.1) 0 1px, transparent 1px 30%),
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.1) 0 1px, transparent 1px 33.334%),
+    linear-gradient(155deg, #0b2340 0%, #123258 55%, #0a1f3a 100%);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    box-shadow:
+      inset 0 0 0 3px #cbd5e1,
+      inset 0 0 0 5px #475569;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    z-index: 0;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-image:
+      linear-gradient(to right, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(to right, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(to bottom, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(to bottom, #52525b, #e4e4e7 42%, #a1a1aa 60%, #3f3f46),
+      linear-gradient(#dc2626, #dc2626),
+      linear-gradient(#18181b, #18181b);
+    background-size:
+      6px 13px,
+      6px 13px,
+      13px 6px,
+      13px 6px,
+      1.5px 11px,
+      1.5px 11px;
+    background-position:
+      top center,
+      bottom center,
+      center left,
+      center right,
+      calc(50% - 5px) top,
+      calc(50% + 5px) top;
   }
 }
 
@@ -442,7 +550,8 @@ body {
   .eyebrow::before,
   .fundo-aurora::before,
   .fundo-aurora::after,
-  .icone-vivo::after {
+  .icone-vivo::after,
+  .icone-vivo::before {
     animation: none;
   }
 }

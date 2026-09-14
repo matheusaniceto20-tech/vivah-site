@@ -8,8 +8,9 @@ interface Props {
 	baixoClaro?: boolean;
 }
 const { cimaClaro = true, baixoClaro = true } = Astro.props;
-const fioCima = cimaClaro ? 'bg-vivah-green/25' : 'bg-white/30';
-const fioBaixo = baixoClaro ? 'bg-vivah-green/25' : 'bg-white/30';
+// mesmo cinza metálico do eletroduto dos cards — no escuro, um pouco mais claro pra aparecer
+const fioCima = cimaClaro ? 'bg-zinc-400' : 'bg-zinc-300/70';
+const fioBaixo = baixoClaro ? 'bg-zinc-400' : 'bg-zinc-300/70';
 ---
 
 <div class="relative z-10 -my-8 flex justify-center" aria-hidden="true">
