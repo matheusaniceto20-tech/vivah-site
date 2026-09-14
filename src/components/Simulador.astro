@@ -42,7 +42,7 @@ const rotulo = 'block text-sm font-semibold mb-1.5';
 
 		<div
 			id="sim-card"
-			class="mt-10 scroll-mt-24 overflow-hidden rounded-3xl bg-white shadow-2xl shadow-vivah-green/10 ring-1 ring-black/5"
+			class="cartao-painel mt-10 scroll-mt-24 rounded-3xl bg-white shadow-2xl shadow-vivah-green/10 ring-[3px] ring-slate-300"
 			data-reveal="zoom"
 		>
 			<div id="sim-progresso" class="px-6 md:px-10 pt-6">
@@ -50,7 +50,12 @@ const rotulo = 'block text-sm font-semibold mb-1.5';
 					{
 						etapas.map((etapa, i) => (
 							<li data-etapa={i} data-ativo={i === 0 ? 'true' : 'false'} class="flex items-center gap-2 data-[ativo=true]:text-vivah-green">
-								<span class="flex h-6 w-6 items-center justify-center rounded-full bg-vivah-mist text-[11px] transition">{i + 1}</span>
+								<span class="relative flex h-7 w-7 shrink-0 items-center justify-center">
+									<img src="/brand/logo-vivah-icone.svg" alt="" aria-hidden="true" class="spin-slow absolute inset-0 h-full w-full" />
+									<span class="relative flex h-4 w-4 items-center justify-center rounded-full bg-vivah-green text-[10px] font-extrabold text-vivah-yellow">
+										{i + 1}
+									</span>
+								</span>
 								{etapa}
 							</li>
 						))
