@@ -26,25 +26,19 @@ const vantagens = [
 
 		<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 			{
-				vantagens.map((v, i) => {
-					const placa = i % 3 === 1;
-					return (
-						<div
-							class:list={[
-								'group rounded-3xl p-7 ring-1 ring-transparent transition duration-300 hover:shadow-xl hover:-translate-y-1',
-								placa ? 'cartao-placa-solar hover:ring-slate-300' : 'cartao-painel bg-vivah-mist/70 hover:bg-white hover:ring-vivah-yellow',
-							]}
-							data-reveal
-							style={`--reveal-delay:${(i % 3) * 100}ms`}
-						>
-							<span class="icone-vivo flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green shadow-md shadow-vivah-star/30 transition duration-500 group-hover:rotate-[-8deg] group-hover:scale-110 [&>svg]:h-7 [&>svg]:w-7">
-								<Fragment set:html={v.icone} />
-							</span>
-							<h3 class:list={['font-display font-bold text-xl mt-5 mb-2', placa ? 'text-white' : 'text-vivah-ink']}>{v.titulo}</h3>
-							<p class:list={['text-sm', placa ? 'text-white/75' : 'text-vivah-muted']}>{v.texto}</p>
-						</div>
-					);
-				})
+				vantagens.map((v, i) => (
+					<div
+						class="cartao-placa-solar group rounded-3xl p-7 ring-1 ring-transparent transition duration-300 hover:ring-slate-300 hover:shadow-xl hover:-translate-y-1"
+						data-reveal
+						style={`--reveal-delay:${(i % 3) * 100}ms`}
+					>
+						<span class="icone-vivo flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green shadow-md shadow-vivah-star/30 transition duration-500 group-hover:rotate-[-8deg] group-hover:scale-110 [&>svg]:h-7 [&>svg]:w-7">
+							<Fragment set:html={v.icone} />
+						</span>
+						<h3 class="font-display font-bold text-xl mt-5 mb-2 text-white">{v.titulo}</h3>
+						<p class="text-sm text-white/75">{v.texto}</p>
+					</div>
+				))
 			}
 		</div>
 	</div>

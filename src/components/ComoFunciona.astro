@@ -46,8 +46,11 @@ const passos = [
 						data-reveal
 						style={`--reveal-delay:${i * 120}ms`}
 					>
-						<span class="icone-vivo relative flex h-16 w-16 items-center justify-center rounded-full bg-vivah-yellow font-display font-extrabold text-2xl text-vivah-green shadow-md shadow-vivah-star/30">
-							{i + 1}
+						<span class="icone-vivo relative flex h-16 w-16 items-center justify-center">
+							<img src="/brand/logo-vivah-icone.svg" alt="" aria-hidden="true" class="spin-slow absolute inset-0 h-full w-full drop-shadow-[0_2px_4px_rgb(0,0,0,0.15)]" />
+							<span class="relative flex h-8 w-8 items-center justify-center rounded-full bg-vivah-green font-display font-extrabold text-base text-vivah-yellow shadow-md">
+								{i + 1}
+							</span>
 						</span>
 						<h3 class="font-display font-bold text-lg mt-5 mb-2 text-vivah-ink">{passo.titulo}</h3>
 						<p class="text-sm text-vivah-muted">{passo.texto}</p>
