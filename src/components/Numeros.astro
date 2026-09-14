@@ -14,13 +14,14 @@ const formatar = (valor: number, casas: number, sufixo: string) =>
 ---
 
 <section id="numeros" class="relative z-10 -mt-16 px-4 sm:px-6 lg:px-8 scroll-mt-24">
+	<div class="mx-auto max-w-5xl mb-2 barra-energia" aria-hidden="true"></div>
 	<div
 		class="mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-2xl bg-vivah-mist shadow-xl shadow-vivah-green/10 ring-1 ring-black/5"
 	>
 		{
 			itens.map((item, i) => (
 				<div class="bg-white p-5 md:p-7 text-center" data-reveal style={`--reveal-delay:${i * 100}ms`}>
-					<p class="font-display font-extrabold text-3xl md:text-4xl text-vivah-green">
+					<p class="font-display font-extrabold text-3xl md:text-4xl text-vivah-green tabular-nums">
 						<span data-count-to={item.valor} data-count-decimals={item.casas} data-count-suffix={item.sufixo}>
 							{formatar(item.valor, item.casas, item.sufixo)}
 						</span>

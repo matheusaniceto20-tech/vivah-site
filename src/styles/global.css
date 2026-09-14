@@ -10,6 +10,7 @@
   --color-vivah-yellow-300: #fff38a;
   --color-vivah-yellow-100: #fff9d1;
   --color-vivah-star: #f5b301;
+  --color-vivah-lime: #97d700;
   --color-vivah-cream: #fffcf0;
   --color-vivah-mist: #f3f6f0;
   --color-vivah-ink: #0e2613;
@@ -42,6 +43,30 @@ body {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 0.5em;
+    border-radius: 999px;
+    background: currentColor;
+    vertical-align: middle;
+    animation: vivah-pulso 2.4s ease-out infinite;
+  }
+}
+
+/* pisca tipo "sinal ao vivo" — usado no ponto antes de cada eyebrow */
+@keyframes vivah-pulso {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 45%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, currentColor 0%, transparent);
+  }
 }
 
 @utility titulo-secao {
@@ -129,6 +154,94 @@ body {
     outline: none;
     border-color: var(--color-vivah-green-700);
     box-shadow: 0 0 0 4px rgb(255 235 61 / 0.55);
+  }
+}
+
+/* ---------- fundo "vivo" pras seções claras — grade tech + brilho solar em movimento ---------- */
+
+@utility fundo-aurora {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -10%;
+    z-index: -2;
+    background:
+      radial-gradient(36rem 26rem at 14% -8%, color-mix(in srgb, var(--color-vivah-yellow) 26%, transparent), transparent 60%),
+      radial-gradient(30rem 28rem at 96% 18%, color-mix(in srgb, var(--color-vivah-green-700) 18%, transparent), transparent 62%),
+      radial-gradient(34rem 30rem at 45% 112%, color-mix(in srgb, var(--color-vivah-lime) 16%, transparent), transparent 58%);
+    animation: vivah-aurora 24s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.55;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--color-vivah-green) 6%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-vivah-green) 6%, transparent) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(75% 60% at 50% 25%, black, transparent 92%);
+    -webkit-mask-image: radial-gradient(75% 60% at 50% 25%, black, transparent 92%);
+    pointer-events: none;
+  }
+}
+
+@keyframes vivah-aurora {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(-2.5%, 2.5%, 0) scale(1.09);
+  }
+}
+
+/* halo tipo corona solar, pulsando atrás de badges de ícone */
+@utility icone-vivo {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-vivah-yellow) 55%, transparent), transparent 70%);
+    opacity: 0;
+    animation: vivah-corona 3.4s ease-in-out infinite;
+  }
+}
+
+@keyframes vivah-corona {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.18);
+  }
+}
+
+/* barra fininha com energia "fluindo" — usada acima da faixa de números */
+.barra-energia {
+  height: 3px;
+  border-radius: 999px;
+  background-image: linear-gradient(90deg, var(--color-vivah-yellow), var(--color-vivah-lime), var(--color-vivah-yellow));
+  background-size: 200% 100%;
+  animation: vivah-fluxo 5s linear infinite;
+}
+
+@keyframes vivah-fluxo {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
   }
 }
 
@@ -222,7 +335,14 @@ body {
   .hero-in,
   .spin-slow,
   .spin-fast,
-  .float {
+  .float,
+  .barra-energia {
+    animation: none;
+  }
+  .eyebrow::before,
+  .fundo-aurora::before,
+  .fundo-aurora::after,
+  .icone-vivo::after {
     animation: none;
   }
 }

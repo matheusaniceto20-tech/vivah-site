@@ -82,7 +82,7 @@ const beneficiosWallbox = [
 		</div>
 	</section>
 
-	<section class="py-20 md:py-28 bg-white">
+	<section class="py-20 md:py-28 bg-white fundo-aurora">
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
 				<span class="eyebrow">Vantagens</span>
@@ -92,7 +92,7 @@ const beneficiosWallbox = [
 				{
 					beneficios.map((b, i) => (
 						<div class="rounded-3xl bg-vivah-mist/70 p-7 ring-1 ring-transparent hover:bg-white hover:ring-vivah-yellow hover:shadow-xl hover:-translate-y-1 transition duration-300" data-reveal style={`--reveal-delay:${(i % 3) * 100}ms`}>
-							<span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={b.icone} />
+							<span class="icone-vivo flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={b.icone} />
 							<h3 class="font-display font-bold text-xl mt-5 mb-2 text-vivah-ink">{b.titulo}</h3>
 							<p class="text-sm text-vivah-muted">{b.texto}</p>
 						</div>
@@ -147,7 +147,7 @@ const beneficiosWallbox = [
 		</div>
 	</section>
 
-	<section class="py-20 md:py-28 bg-white">
+	<section class="py-20 md:py-28 bg-white fundo-aurora">
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
 				<span class="eyebrow">Carregador veicular</span>
@@ -161,16 +161,19 @@ const beneficiosWallbox = [
 				{
 					beneficiosWallbox.map((b, i) => (
 						<div class="rounded-3xl bg-vivah-mist/70 p-7 ring-1 ring-transparent hover:bg-white hover:ring-vivah-yellow hover:shadow-xl hover:-translate-y-1 transition duration-300" data-reveal style={`--reveal-delay:${i * 100}ms`}>
-							<span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={b.icone} />
+							<span class="icone-vivo flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={b.icone} />
 							<h3 class="font-display font-bold text-xl mt-5 mb-2 text-vivah-ink">{b.titulo}</h3>
 							<p class="text-sm text-vivah-muted">{b.texto}</p>
 						</div>
 					))
 				}
 			</div>
-			<div class="text-center mt-10">
+			<div class="text-center mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
 				<a href={linkWhatsApp('Quero um orçamento de wallbox (carregador veicular).')} target="_blank" rel="noopener noreferrer" class="btn btn-verde">
 					Pedir orçamento de wallbox
+				</a>
+				<a href="/blog/wallbox-carregador-carro-eletrico-guia" class="font-semibold text-vivah-green-700 hover:underline">
+					Ver guia completo da wallbox →
 				</a>
 			</div>
 		</div>
