@@ -11,6 +11,8 @@ const cards = await Promise.all(
 		),
 	}))
 );
+// projetos com depoimento/avaliação aparecem primeiro — reforça prova social logo de cara
+cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 ---
 
 <section id="projetos" class="py-20 md:py-28 bg-vivah-mist scroll-mt-20">

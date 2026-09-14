@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { Image as ImageIcon, CarFront, Sun, Ruler, Wallet, Leaf, ChevronDown } from 'lucide-static';
+import { Image as ImageIcon, CarFront, Sun, Ruler, Wallet, Leaf, ChevronDown, Zap, ShieldCheck } from 'lucide-static';
 import { linkWhatsApp } from '../lib/negocio';
 import { projetos } from '../data/projetos';
 import carportPoster from '../assets/brand/carport-poster.jpg';
@@ -35,7 +35,13 @@ const faq = [
 	},
 	{ p: 'Serve pra empresa também?', r: 'Serve. É uma das soluções mais usadas em comércios, condomínios e empresas com estacionamento próprio.' },
 	{ p: 'A estrutura aguenta o peso da chuva e do vento?', r: 'Sim, a estrutura é dimensionada na visita técnica considerando carga de vento e água da região.' },
-	{ p: 'Dá pra colocar carregador de carro elétrico junto?', r: 'Dá. É um complemento comum num carport solar — a gente já projeta pensando nisso quando você quiser.' },
+	{ p: 'Preciso ter um carport pra instalar a wallbox?', r: 'Não. A wallbox funciona avulsa, direto na garagem — o carport é só uma forma de já gerar a energia que ela consome.' },
+];
+
+const beneficiosWallbox = [
+	{ icone: Zap, titulo: 'Recarga bem mais rápida', texto: 'Muito mais rápido que uma tomada comum — o carro fica pronto em horas, não no dia inteiro.' },
+	{ icone: CarFront, titulo: 'Com ou sem carport', texto: 'Instala avulsa, direto na garagem, ou já integrada a um carport solar novo.' },
+	{ icone: ShieldCheck, titulo: 'Instalação dentro da norma', texto: 'Circuito elétrico dedicado e dimensionado só pra ela, sem sobrecarregar o resto do imóvel.' },
 ];
 ---
 
@@ -137,6 +143,35 @@ const faq = [
 					sizes="25vw"
 					class="col-span-2 w-full aspect-[16/10] object-cover rounded-2xl"
 				/>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-white">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow">Carregador veicular</span>
+				<h2 class="titulo-secao">Wallbox: um produto <span class="marker">à parte</span></h2>
+				<p class="mt-4 text-vivah-muted">
+					Wallbox é o nome do equipamento de recarga veicular — diferente do carport, que é a estrutura.
+					Um não depende do outro: dá pra ter só a wallbox, só o carport, ou os dois juntos.
+				</p>
+			</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				{
+					beneficiosWallbox.map((b, i) => (
+						<div class="rounded-3xl bg-vivah-mist/70 p-7 ring-1 ring-transparent hover:bg-white hover:ring-vivah-yellow hover:shadow-xl hover:-translate-y-1 transition duration-300" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+							<span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={b.icone} />
+							<h3 class="font-display font-bold text-xl mt-5 mb-2 text-vivah-ink">{b.titulo}</h3>
+							<p class="text-sm text-vivah-muted">{b.texto}</p>
+						</div>
+					))
+				}
+			</div>
+			<div class="text-center mt-10">
+				<a href={linkWhatsApp('Quero um orçamento de wallbox (carregador veicular).')} target="_blank" rel="noopener noreferrer" class="btn btn-verde">
+					Pedir orçamento de wallbox
+				</a>
 			</div>
 		</div>
 	</section>
