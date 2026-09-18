@@ -3,8 +3,7 @@ import { negocio, anosDeMercado } from '../lib/negocio';
 
 const anos = anosDeMercado();
 const itens = [
-	{ valor: negocio.notaGoogle, casas: 1, sufixo: '', rotulo: 'de nota no Google', estrela: true },
-	{ valor: negocio.avaliacoesGoogle, casas: 0, sufixo: '', rotulo: 'avaliações, todas 5 estrelas' },
+	{ valor: negocio.notaGoogle, casas: 1, sufixo: '', rotulo: 'Todas as notas no Google', estrela: true },
 	{ valor: 300, casas: 0, sufixo: ' km', rotulo: 'de raio de atendimento' },
 	{ valor: anos, casas: 0, sufixo: anos === 1 ? ' ano' : ' anos', rotulo: 'de mercado' },
 ];
@@ -16,7 +15,7 @@ const formatar = (valor: number, casas: number, sufixo: string) =>
 <section id="numeros" class="relative z-10 -mt-16 px-4 sm:px-6 lg:px-8 scroll-mt-24">
 	<div class="mx-auto max-w-5xl mb-2 barra-energia" aria-hidden="true"></div>
 	<div
-		class="mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-2xl bg-vivah-mist shadow-xl shadow-vivah-green/10 ring-1 ring-black/5"
+		class="mx-auto max-w-5xl grid grid-cols-3 gap-px overflow-hidden rounded-2xl bg-vivah-mist shadow-xl shadow-vivah-green/10 ring-1 ring-black/5"
 	>
 		{
 			itens.map((item, i) => (

@@ -41,16 +41,23 @@ período parado, e sai pronto.
 
 ## Modelos e potência: o que muda na prática
 
-A potência de uma wallbox depende principalmente do **tipo de ligação
-elétrica do imóvel**:
+A potência que a wallbox consegue entregar depende do **tipo de ligação
+elétrica do imóvel** — mas a velocidade real de recarga depende também do
+carregador embarcado no carro, que tem seu próprio limite:
 
 - **Monofásica:** modelos de até 7,4 kW são os mais comuns — atende bem a
   maioria das casas.
 - **Bifásica:** também comporta modelos na faixa de 7,4 kW, dependendo da
   instalação.
-- **Trifásica:** permite modelos de 11 kW ou 22 kW — recarga
-  significativamente mais rápida, mais indicada pra quem roda mais por dia
-  ou pra uso comercial (frota, estacionamento de clientes).
+- **Trifásica:** permite modelos de 11 kW ou 22 kW — mas isso só vira
+  recarga mais rápida de verdade se o carro aceitar essa potência.
+
+Isso importa porque a maioria dos carros elétricos vendidos hoje tem o
+carregador de bordo limitado a algo em torno de 7 kW, mesmo instalado numa
+wallbox trifásica de potência maior — quem define o teto real da recarga é
+o carro, não só a wallbox. Por isso, antes de escolher o modelo, vale
+confirmar o limite do carregador embarcado do seu carro (vem na ficha
+técnica ou no manual).
 
 Além da potência, outros pontos que diferenciam os modelos: cabo fixo ou
 tomada Tipo 2 (pra usar o cabo do próprio carro), controle por aplicativo
@@ -58,8 +65,9 @@ tomada Tipo 2 (pra usar o cabo do próprio carro), controle por aplicativo
 sobrecarga e curto-circuito embutida no próprio equipamento.
 
 Não existe "o melhor modelo" de forma genérica — o que funciona depende do
-padrão de energia do seu imóvel e de quanto você roda por dia. É exatamente
-isso que a visita técnica define.
+padrão de energia do seu imóvel, do limite do carro que você tem (ou vai
+comprar) e de quanto você roda por dia. É exatamente isso que a visita
+técnica define.
 
 ## Como funciona a instalação
 
