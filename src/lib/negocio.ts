@@ -15,7 +15,6 @@ export const negocio = {
 	cidade: 'Palmas - TO',
 	raioAtendimento: 'até 300km de Palmas',
 	notaGoogle: 5.0,
-	avaliacoesGoogle: 14,
 	googlePerfilUrl: 'https://www.google.com/maps?cid=9400688741611047832',
 	localizacao: { lat: -10.2483985, lng: -48.3398451 },
 } as const;
