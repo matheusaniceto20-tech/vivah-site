@@ -1,0 +1,245 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Clock, AlertTriangle, TrendingUp, Wallet, Zap, Gauge, ShieldCheck, Building2, Container, Check, ChevronDown } from 'lucide-static';
+import { linkWhatsApp } from '../lib/negocio';
+import Emenda from '../components/Emenda.astro';
+
+const problemas = [
+	{ icone: Clock, titulo: 'Horário de ponta', texto: 'Energia consumida entre 17h30 e 20h30 pode custar até 5x mais que no resto do dia.' },
+	{ icone: AlertTriangle, titulo: 'Multa por ultrapassagem', texto: 'Passar da demanda contratada gera penalidade que pode chegar a 3x o valor do excedente.' },
+	{ icone: TrendingUp, titulo: 'Reajuste automático', texto: 'Depois de um pico, a distribuidora pode elevar sozinha a demanda contratada — e a conta sobe de vez.' },
+	{ icone: Wallet, titulo: 'Fluxo de caixa imprevisível', texto: 'Sem controle sobre os picos, fica difícil planejar o custo de energia mês a mês.' },
+];
+
+const etapas = [
+	{ titulo: 'Carrega fora do pico', texto: 'A bateria carrega durante a madrugada ou manhã, quando a energia é mais barata.' },
+	{ titulo: 'Assume o horário de ponta', texto: 'No horário mais caro (17h30–20h30), o sistema entra automaticamente e reduz a demanda puxada da rede.' },
+	{ titulo: 'Controla os picos', texto: 'Evita ultrapassar a demanda contratada, reduzindo o risco de multa e de reajuste automático.' },
+	{ titulo: 'Vira backup de emergência', texto: 'Se a rede cair, a bateria também serve como energia de reserva pra manter a operação.' },
+];
+
+const perfil = [
+	'Conta de energia mensal alta, com histórico de multa por ultrapassagem de demanda',
+	'Consumo concentrado no horário de ponta (17h30–20h30)',
+	'Conexão Grupo A (13,8 kV ou mais)',
+	'Planejamento de médio a longo prazo pro negócio',
+];
+
+const numeros = [
+	{ valor: '~3 anos', legenda: 'payback típico desse tipo de solução' },
+	{ valor: '10 anos', legenda: 'garantia usual de fabricante' },
+	{ valor: '15+ anos', legenda: 'vida útil esperada da bateria' },
+	{ valor: 'LiFePO4', legenda: 'tecnologia de lítio mais usada em BESS' },
+];
+
+const faq = [
+	{
+		p: 'O que é BESS?',
+		r: 'Battery Energy Storage System — sistema de armazenamento de energia em baterias, dimensionado pra controlar quando a empresa puxa energia da rede, e não só reduzir o consumo total.',
+	},
+	{
+		p: 'BESS é a mesma coisa que energia solar?',
+		r: 'Não. É um sistema de bateria que pode funcionar sozinho, controlando os horários de consumo, ou combinado com energia solar — nesse caso, o excedente gerado durante o dia carrega a bateria em vez de ir só pra rede.',
+	},
+	{
+		p: 'Minha empresa precisa ser Grupo A pra fazer sentido?',
+		r: 'É o perfil mais comum, porque é quem sofre com tarifa de ponta e multa por ultrapassagem de demanda. Fora desse perfil, o retorno financeiro tende a ser menor.',
+	},
+	{
+		p: 'Quanto espaço um sistema desses ocupa?',
+		r: 'Varia com o porte: empresas menores cabem num gabinete compacto; indústrias maiores usam contêineres climatizados de 3 a 6 metros, dimensionados no projeto.',
+	},
+	{
+		p: 'Como sei se vale a pena pro meu caso?',
+		r: 'Precisamos ver a conta de energia e o histórico de demanda da sua empresa pra fazer essa conta. É o que a análise de viabilidade responde.',
+	},
+];
+---
+
+<Layout
+	title="BESS — Controle de Demanda e Redução de Custo de Energia"
+	description="Sistema de armazenamento de energia (BESS) pra empresas Grupo A: reduz consumo no horário de ponta e evita multa por ultrapassagem de demanda."
+	heroHeader
+>
+	<section class="relative overflow-hidden bg-vivah-green py-28 md:py-36 text-white">
+		<img src="/brand/logo-vivah-icone.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-32 -top-32 w-96 opacity-10 spin-slow" />
+		<div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+			<span class="eyebrow !bg-white/10 !text-vivah-yellow">Empresas Grupo A</span>
+			<h1 class="font-display font-extrabold text-4xl md:text-6xl leading-tight">
+				Não é <span class="text-vivah-yellow">quanto</span> você consome. É <span class="text-vivah-yellow">quando</span>.
+			</h1>
+			<p class="mt-5 text-lg text-white/85 max-w-2xl">
+				Pra empresas de média e alta tensão, boa parte do custo de energia vem do horário em que ela é consumida
+				— não só do total. Um sistema de baterias (BESS) controla isso: carrega barato, descarrega caro, e reduz
+				o risco de multa por ultrapassar a demanda contratada.
+			</p>
+			<a href={linkWhatsApp('Quero uma análise de viabilidade de BESS para minha empresa.')} target="_blank" rel="noopener noreferrer" class="btn btn-amarelo mt-8">
+				Pedir análise de viabilidade
+			</a>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-white fundo-aurora">
+		<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow">O problema</span>
+				<h2 class="titulo-secao">Onde o custo <span class="marker">realmente</span> aparece</h2>
+			</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{
+					problemas.map((p, i) => (
+						<div class="rounded-3xl bg-vivah-mist/70 p-6 hover:bg-white hover:shadow-xl hover:ring-1 hover:ring-vivah-yellow hover:-translate-y-1 transition duration-300" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+							<span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-6 [&>svg]:w-6" set:html={p.icone} />
+							<h3 class="font-display font-bold text-lg mt-4 mb-1.5">{p.titulo}</h3>
+							<p class="text-sm text-vivah-muted">{p.texto}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<Emenda baixoClaro={false} />
+
+	<section class="py-20 md:py-28 bg-vivah-green text-white">
+		<div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow !bg-white/10 !text-vivah-yellow">Como funciona</span>
+				<h2 class="titulo-secao !text-white">As quatro etapas do <span class="text-vivah-yellow">BESS</span></h2>
+			</div>
+			<ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+				{
+					etapas.map((e, i) => (
+						<li class="rounded-2xl bg-white/10 p-6" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+							<span class="flex h-9 w-9 items-center justify-center rounded-full bg-vivah-yellow font-display font-bold text-vivah-green">{i + 1}</span>
+							<p class="font-display font-bold mt-4 mb-1.5">{e.titulo}</p>
+							<p class="text-sm text-white/75">{e.texto}</p>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<Emenda cimaClaro={false} />
+
+	<section class="py-20 md:py-28 bg-white">
+		<div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+			<div data-reveal="left">
+				<span class="eyebrow">Pra quem</span>
+				<h2 class="titulo-secao">Perfil que mais se <span class="marker">beneficia</span></h2>
+				<ul class="mt-6 space-y-3">
+					{
+						perfil.map((item) => (
+							<li class="flex gap-3">
+								<span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-vivah-green text-white [&>svg]:h-3.5 [&>svg]:w-3.5" set:html={Check} />
+								<span class="text-sm text-vivah-ink">{item}</span>
+							</li>
+						))
+					}
+				</ul>
+				<p class="mt-5 text-sm text-vivah-muted">
+					Fora desse perfil o BESS ainda pode fazer sentido — é a análise de viabilidade que confirma, olhando a
+					sua conta de energia e o histórico de demanda.
+				</p>
+			</div>
+			<div class="rounded-3xl bg-vivah-mist p-8" data-reveal="right">
+				<span class="icone-vivo flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={Building2} />
+				<h3 class="font-display font-bold text-xl mt-5 mb-2">Escala do projeto</h3>
+				<p class="text-sm text-vivah-muted">
+					A instalação acompanha o porte da empresa: de um gabinete compacto pra negócios menores até
+					contêineres climatizados de 3 a 6 metros pra indústrias de maior consumo.
+				</p>
+				<span class="icone-vivo mt-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-vivah-green [&>svg]:h-6 [&>svg]:w-6" set:html={Container} />
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-vivah-mist">
+		<div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow">Referência de mercado</span>
+				<h2 class="titulo-secao">Números <span class="marker">típicos</span> desse tipo de solução</h2>
+				<p class="mt-4 text-vivah-muted">
+					Cada projeto de BESS é dimensionado sob medida — os valores abaixo são referência de mercado pra esse
+					tipo de tecnologia, não uma garantia fechada. O número real do seu caso sai da análise de viabilidade.
+				</p>
+			</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{
+					numeros.map((n, i) => (
+						<div class="rounded-3xl bg-white p-7 text-center ring-1 ring-black/5" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+							<p class="font-display font-extrabold text-3xl text-vivah-green">{n.valor}</p>
+							<p class="mt-2 text-sm text-vivah-muted">{n.legenda}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-white">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow">Vantagens</span>
+				<h2 class="titulo-secao">Por que controlar a <span class="marker">demanda</span></h2>
+			</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				<div class="rounded-3xl bg-vivah-mist/70 p-6" data-reveal>
+					<span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-6 [&>svg]:w-6" set:html={Zap} />
+					<h3 class="font-display font-bold text-lg mt-4 mb-1.5">Menos consumo na ponta</h3>
+					<p class="text-sm text-vivah-muted">Reduz a energia puxada da rede no horário mais caro do dia.</p>
+				</div>
+				<div class="rounded-3xl bg-vivah-mist/70 p-6" data-reveal style="--reveal-delay:100ms">
+					<span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-6 [&>svg]:w-6" set:html={Gauge} />
+					<h3 class="font-display font-bold text-lg mt-4 mb-1.5">Controle de picos</h3>
+					<p class="text-sm text-vivah-muted">Diminui o risco de ultrapassar a demanda contratada e levar multa.</p>
+				</div>
+				<div class="rounded-3xl bg-vivah-mist/70 p-6" data-reveal style="--reveal-delay:200ms">
+					<span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-6 [&>svg]:w-6" set:html={Wallet} />
+					<h3 class="font-display font-bold text-lg mt-4 mb-1.5">Custo previsível</h3>
+					<p class="text-sm text-vivah-muted">Planejamento financeiro mais estável, sem surpresa na conta de energia.</p>
+				</div>
+				<div class="rounded-3xl bg-vivah-mist/70 p-6" data-reveal style="--reveal-delay:300ms">
+					<span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-6 [&>svg]:w-6" set:html={ShieldCheck} />
+					<h3 class="font-display font-bold text-lg mt-4 mb-1.5">Backup de emergência</h3>
+					<p class="text-sm text-vivah-muted">Se a rede cair, a bateria também sustenta a operação por um tempo.</p>
+				</div>
+			</div>
+			<p class="mt-8 text-center text-sm text-vivah-muted max-w-2xl mx-auto">
+				A Vivah já é capacitada em sistemas de armazenamento de energia — inclusive combinando BESS com solar em
+				projetos híbridos. <a href="/hibridos" class="font-semibold text-vivah-green-700 underline underline-offset-2">Conheça os sistemas híbridos e BESS</a>.
+			</p>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-vivah-mist">
+		<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+			<h2 class="titulo-secao text-center mb-12">Perguntas sobre BESS pra empresas</h2>
+			<div class="space-y-3">
+				{
+					faq.map((item) => (
+						<details class="group rounded-2xl bg-white p-5 ring-1 ring-transparent open:ring-vivah-yellow open:shadow-lg transition">
+							<summary class="flex items-center justify-between gap-4 cursor-pointer font-semibold list-none">
+								{item.p}
+								<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-vivah-yellow text-vivah-green [&>svg]:h-4 [&>svg]:w-4 group-open:rotate-180 transition-transform" set:html={ChevronDown} />
+							</summary>
+							<p class="mt-3 text-sm text-vivah-muted">{item.r}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-vivah-yellow py-16 text-center">
+		<h2 class="font-display font-extrabold text-3xl md:text-4xl text-vivah-green">Quer saber se vale a pena pra sua empresa?</h2>
+		<p class="mt-3 text-vivah-green/80 max-w-xl mx-auto px-4">
+			Manda a conta de energia e o histórico de demanda dos últimos meses — a gente faz a análise de viabilidade
+			sem compromisso.
+		</p>
+		<a href={linkWhatsApp('Quero uma análise de viabilidade de BESS para minha empresa.')} target="_blank" rel="noopener noreferrer" class="btn btn-verde mt-6">
+			Pedir análise de viabilidade
+		</a>
+	</section>
+</Layout>
