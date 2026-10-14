@@ -1,0 +1,8 @@
+{
+  "_comment": "Fila de publicação automática do blog. A rotina agendada (ver .claude ou RemoteTrigger routine 'Publicar artigo do blog') pega o primeiro slug cujo arquivo ainda tem draft:true, publica (draft:false + publishedAt = data do dia), comita e sobe. Pra adicionar mais temas na fila, escrever o rascunho em src/content/blog/<slug>.md com draft:true e adicionar o slug aqui na ordem desejada.",
+  "queue": [
+    "palmas-solar-desconto-iptu-energia-solar",
+    "reajuste-energisa-tocantins-2026",
+    "fio-b-lei-14300-por-que-conta-nao-zera"
+  ]
+}
