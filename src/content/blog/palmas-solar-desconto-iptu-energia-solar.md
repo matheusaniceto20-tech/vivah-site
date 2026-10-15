@@ -1,7 +1,7 @@
 ---
 title: "Palmas Solar: como conseguir desconto no IPTU instalando energia solar"
 description: "O programa Palmas Solar dá desconto de até 40% no IPTU e ITBI pra quem usa energia solar fotovoltaica. Veja como funciona e como aderir."
-publishedAt: 2026-10-16
+publishedAt: 2026-10-15
 author: "Vivah Energia Solar"
 keywords:
   - palmas solar
@@ -9,7 +9,7 @@ keywords:
   - iptu verde palmas
   - isenção iptu energia solar palmas
   - decreto palmas solar
-draft: true
+draft: false
 ---
 
 Quem instala energia solar em Palmas já sabe que a conta de luz cai. O que
