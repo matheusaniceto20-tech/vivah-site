@@ -1,14 +1,14 @@
 ---
 title: "Conta de luz subiu em Palmas: o que o reajuste da Energisa significa"
 description: "A Aneel aprovou reajuste médio de 7,92% nas tarifas da Energisa Tocantins, em vigor desde julho de 2026. Entenda o que isso muda na sua conta."
-publishedAt: 2026-10-18
+publishedAt: 2026-10-17
 author: "Vivah Energia Solar"
 keywords:
   - reajuste energisa tocantins
   - conta de luz subiu palmas
   - tarifa energisa 2026
   - aumento energia elétrica tocantins
-draft: true
+draft: false
 ---
 
 Se a sua conta de luz veio mais alta nos últimos meses mesmo sem mudar o
