@@ -1,6 +1,6 @@
 ---
 import { Image, getImage } from 'astro:assets';
-import { Images, ChevronLeft, ChevronRight, X } from 'lucide-static';
+import { Images, ChevronLeft, ChevronRight, X, Play } from 'lucide-static';
 import { projetos, categorias, rotuloCategoria } from '../data/projetos';
 
 const cards = await Promise.all(
@@ -59,6 +59,17 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 									<Fragment set:html={Images} />
 									{p.fotos.length} fotos
 								</span>
+								{p.video && (
+									<button
+										type="button"
+										class="absolute left-3 bottom-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-vivah-yellow px-3 py-1 text-xs font-bold text-vivah-green [&>svg]:h-3.5 [&>svg]:w-3.5 hover:scale-105 transition"
+										data-video={p.video}
+										aria-label={`Assistir vídeo do projeto ${p.titulo}`}
+									>
+										<Fragment set:html={Play} />
+										Vídeo
+									</button>
+								)}
 							</div>
 							<div class="flex flex-1 flex-col p-5">
 								<h3 class="font-display font-bold text-xl text-vivah-ink">{p.titulo}</h3>
@@ -115,9 +126,11 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 		</div>
 		<div class="relative flex items-center justify-center bg-black">
 			<img id="galeria-foto" alt="" class="max-h-[80vh] w-auto max-w-full object-contain" />
+			<video id="galeria-video" hidden controls autoplay playsinline class="max-h-[80vh] w-auto max-w-full object-contain"></video>
 			<button
 				type="button"
 				data-anterior
+				data-nav
 				aria-label="Foto anterior"
 				class="absolute left-2 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-vivah-yellow text-vivah-green shadow-lg hover:scale-105 transition [&>svg]:h-6 [&>svg]:w-6"
 			>
@@ -126,6 +139,7 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 			<button
 				type="button"
 				data-proxima
+				data-nav
 				aria-label="Próxima foto"
 				class="absolute right-2 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-vivah-yellow text-vivah-green shadow-lg hover:scale-105 transition [&>svg]:h-6 [&>svg]:w-6"
 			>
@@ -139,6 +153,8 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 	const secao = document.getElementById('projetos');
 	const dialogo = document.getElementById('galeria') as HTMLDialogElement | null;
 	const foto = document.getElementById('galeria-foto') as HTMLImageElement | null;
+	const video = document.getElementById('galeria-video') as HTMLVideoElement | null;
+	const navs = dialogo?.querySelectorAll<HTMLButtonElement>('[data-nav]') ?? [];
 	const titulo = document.getElementById('galeria-titulo');
 	const contador = document.getElementById('galeria-contador');
 	let fotos: string[] = [];
@@ -151,6 +167,17 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 		foto.src = fotos[indice];
 		foto.alt = `${nomeProjeto} — foto ${indice + 1} de ${fotos.length}`;
 		if (contador) contador.textContent = `${indice + 1} / ${fotos.length}`;
+	}
+
+	function abrirVideo(src: string, nome: string) {
+		if (!video || !foto) return;
+		video.src = src;
+		video.hidden = false;
+		foto.hidden = true;
+		navs.forEach((n) => (n.hidden = true));
+		if (titulo) titulo.textContent = nome;
+		if (contador) contador.textContent = '';
+		dialogo?.showModal();
 	}
 
 	// filtro por categoria
@@ -167,9 +194,16 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 		})
 	);
 
-	// galeria
+	// galeria de fotos
 	secao?.querySelectorAll<HTMLButtonElement>('[data-galeria]').forEach((botao) =>
 		botao.addEventListener('click', () => {
+			if (video) {
+				video.pause();
+				video.hidden = true;
+				video.removeAttribute('src');
+			}
+			if (foto) foto.hidden = false;
+			navs.forEach((n) => (n.hidden = false));
 			fotos = JSON.parse(botao.dataset.galeria ?? '[]');
 			nomeProjeto = botao.dataset.titulo ?? '';
 			if (titulo) titulo.textContent = nomeProjeto;
@@ -177,11 +211,24 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 			dialogo?.showModal();
 		})
 	);
+	// vídeo do projeto
+	secao?.querySelectorAll<HTMLButtonElement>('[data-video]').forEach((botao) =>
+		botao.addEventListener('click', () => {
+			const nome = botao.closest('article')?.querySelector('h3')?.textContent ?? '';
+			abrirVideo(botao.dataset.video ?? '', nome);
+		})
+	);
 	dialogo?.querySelector('[data-anterior]')?.addEventListener('click', () => mostrar(indice - 1));
 	dialogo?.querySelector('[data-proxima]')?.addEventListener('click', () => mostrar(indice + 1));
 	dialogo?.querySelector('[data-fechar]')?.addEventListener('click', () => dialogo.close());
 	dialogo?.addEventListener('click', (e) => {
 		if (e.target === dialogo) dialogo.close();
+	});
+	dialogo?.addEventListener('close', () => {
+		if (video) {
+			video.pause();
+			video.removeAttribute('src');
+		}
 	});
 	dialogo?.addEventListener('keydown', (e) => {
 		if (e.key === 'ArrowLeft') mostrar(indice - 1);

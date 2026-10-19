@@ -3,7 +3,7 @@
 // Especificações só quando há evidência (nome do arquivo, app de monitoramento).
 import type { ImageMetadata } from 'astro';
 
-export type Categoria = 'residencial' | 'carport' | 'grande-porte';
+export type Categoria = 'residencial' | 'carport' | 'grande-porte' | 'comercial';
 
 export interface Projeto {
 	slug: string;
@@ -13,6 +13,8 @@ export interface Projeto {
 	specs: string[];
 	/** trecho da avaliação que a pessoa deixou no Google */
 	avaliacao?: string;
+	/** caminho público do vídeo do projeto (public/videos/portfolio/<slug>.mp4), opcional */
+	video?: string;
 	fotos: ImageMetadata[];
 }
 
@@ -26,6 +28,13 @@ function fotosDe(slug: string) {
 }
 
 const dados: Omit<Projeto, 'fotos'>[] = [
+	{
+		slug: 'pousada',
+		titulo: 'Pousada Terceira Idade',
+		categoria: 'grande-porte',
+		specs: ['50 placas'],
+		video: '/videos/portfolio/pousada.mp4',
+	},
 	{
 		slug: 'naval',
 		titulo: 'Naval',
@@ -94,6 +103,7 @@ export const rotuloCategoria: Record<Categoria, string> = {
 	residencial: 'Residencial',
 	carport: 'Carport',
 	'grande-porte': 'Grande porte',
+	comercial: 'Comercial',
 };
 
 export const categorias = [
@@ -101,6 +111,7 @@ export const categorias = [
 	{ id: 'residencial', rotulo: 'Residencial' },
 	{ id: 'carport', rotulo: 'Carport e garagens' },
 	{ id: 'grande-porte', rotulo: 'Grande porte' },
+	{ id: 'comercial', rotulo: 'Comercial' },
 ].map((c) => ({
 	...c,
 	total: c.id === 'todos' ? projetos.length : projetos.filter((p) => p.categoria === c.id).length,
