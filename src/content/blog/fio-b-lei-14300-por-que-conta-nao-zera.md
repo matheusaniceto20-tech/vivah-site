@@ -1,14 +1,14 @@
 ---
 title: "Fio B e Lei 14.300: por que a conta de luz não zera com energia solar"
 description: "Entenda o que é o Fio B, por que ele incide sobre a energia compensada, e como o cronograma da Lei 14.300 (60% em 2026, 75% em 2027, 90% em 2028) afeta sua conta."
-publishedAt: 2026-10-20
+publishedAt: 2026-10-19
 author: "Vivah Energia Solar"
 keywords:
   - fio b energia solar
   - lei 14300
   - por que conta de luz não zera com energia solar
   - fio b lei 14300 cronograma
-draft: true
+draft: false
 ---
 
 Uma dúvida comum de quem já tem energia solar — ou está pesquisando antes
