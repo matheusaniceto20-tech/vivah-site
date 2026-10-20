@@ -9,7 +9,8 @@ export interface Projeto {
 	slug: string;
 	titulo: string;
 	local?: string;
-	categoria: Categoria;
+	/** um projeto pode entrar em mais de uma categoria (ex: carport de grande porte) */
+	categorias: Categoria[];
 	specs: string[];
 	/** trecho da avaliação que a pessoa deixou no Google */
 	avaliacao?: string;
@@ -29,87 +30,97 @@ function fotosDe(slug: string) {
 
 const dados: Omit<Projeto, 'fotos'>[] = [
 	{
+		slug: 'naval',
+		titulo: 'Naval',
+		local: 'Caseara (TO)',
+		categorias: ['grande-porte', 'carport'],
+		specs: ['Estrutura tipo carport', '56 kWp', 'Às margens do rio'],
+		avaliacao:
+			'Excelente empresa! Felipe desenhou o melhor projeto com soluções inovadoras para nossa empresa. Só temos a agradecer e indicar os seus serviços. O pós venda também é comprometido em oferecer todo o suporte necessário.',
+	},
+	{
 		slug: 'pousada',
 		titulo: 'Pousada Terceira Idade',
-		categoria: 'grande-porte',
+		categorias: ['grande-porte'],
 		specs: ['50 placas'],
 		video: '/videos/portfolio/pousada.mp4',
 	},
 	{
 		slug: 'joaobatista',
 		titulo: 'João Batista',
-		categoria: 'grande-porte',
+		categorias: ['grande-porte'],
 		specs: ['50 placas'],
 		video: '/videos/portfolio/joaobatista.mp4',
 	},
 	{
-		slug: 'eduardo',
-		titulo: 'Eduardo B',
-		categoria: 'grande-porte',
-		specs: [],
+		slug: 'luciana',
+		titulo: 'Luciana',
+		categorias: ['grande-porte'],
+		specs: ['86 placas', '60,2 kWp'],
+		avaliacao: 'A melhor de Palmas. Atendimento e pós venda maravilhosa.',
 	},
+	{ slug: 'matheus', titulo: 'Matheus', categorias: ['grande-porte'], specs: ['60 placas'] },
 	{
 		slug: 'barbearia',
 		titulo: 'Olimpio Barbearia',
-		categoria: 'comercial',
+		categorias: ['comercial'],
 		specs: [],
 		avaliacao: 'Excelente empresa.',
 		video: '/videos/portfolio/barbearia.mp4',
 	},
 	{
+		slug: 'eduardo',
+		titulo: 'Eduardo B',
+		categorias: ['residencial'],
+		specs: ['28 placas', '19,6 kWp'],
+	},
+	{
 		slug: 'edson',
 		titulo: 'Edson Hugo',
-		categoria: 'residencial',
+		categorias: ['residencial'],
 		specs: [],
 		video: '/videos/portfolio/edson.mp4',
 	},
 	{
 		slug: 'frederico',
 		titulo: 'Frederico',
-		categoria: 'residencial',
+		categorias: ['residencial'],
 		specs: [],
 		video: '/videos/portfolio/frederico.mp4',
 	},
-	{
-		slug: 'naval',
-		titulo: 'Naval',
-		local: 'Caseara (TO)',
-		categoria: 'carport',
-		specs: ['Estrutura tipo carport', 'Às margens do rio'],
-	},
-	{ slug: 'matheus', titulo: 'Matheus', categoria: 'grande-porte', specs: ['60 placas'] },
-	{
-		slug: 'luciana',
-		titulo: 'Luciana',
-		categoria: 'grande-porte',
-		specs: ['Telhados de grande área'],
-		avaliacao: 'A melhor de Palmas. Atendimento e pós venda maravilhosa.',
-	},
-	{ slug: 'marcos', titulo: 'Marcos', categoria: 'carport', specs: ['Garagem coberta com placas'] },
+	{ slug: 'marcos', titulo: 'Marcos', categorias: ['carport'], specs: ['Garagem coberta com placas'] },
 	{
 		slug: 'lucilene',
 		titulo: 'Lucilene',
 		local: '305 Sul, Palmas',
-		categoria: 'residencial',
+		categorias: ['residencial'],
 		specs: ['16 placas', '4 microinversores'],
+	},
+	{
+		slug: 'joaorodolfo',
+		titulo: 'João Rodolfo',
+		categorias: ['residencial'],
+		specs: ['16 placas', '4 microinversores'],
+		avaliacao:
+			'Quero agradecer demais não só pela venda, negociação e preço. Mas pela qualidade da entrega, dos produtos, do trabalho e principalmente pelo pós venda!',
 	},
 	{
 		slug: 'paulo',
 		titulo: 'Paulo',
-		categoria: 'residencial',
+		categorias: ['residencial'],
 		specs: ['14 placas', '4 microinversores', 'Padrão de energia refeito'],
 	},
 	{
 		slug: 'jahiny',
 		titulo: 'Jahiny',
-		categoria: 'residencial',
+		categorias: ['residencial'],
 		specs: ['11 placas', '3 microinversores'],
 		avaliacao: 'Pré e pós venda de excelência! Empresa realmente comprometida com o cliente e o trabalho desempenhado!',
 	},
 	{
 		slug: 'stela',
 		titulo: 'Stela',
-		categoria: 'residencial',
+		categorias: ['residencial'],
 		specs: ['7,0 kWp'],
 		avaliacao:
 			'Eu sempre tive vontade de colocar energia solar na minha casa [...] a Vivah pôde me oferecer isso, me auxiliar e deu certo. Não me arrependo, e recomendo.',
@@ -117,7 +128,7 @@ const dados: Omit<Projeto, 'fotos'>[] = [
 	{
 		slug: 'joana',
 		titulo: 'Joana',
-		categoria: 'residencial',
+		categorias: ['residencial'],
 		specs: [],
 		avaliacao:
 			'Vim avaliar após um ano de instalação da minha energia solar, nunca tive nenhum problema e sempre tive um excelente atendimento no pós-venda.',
@@ -125,11 +136,11 @@ const dados: Omit<Projeto, 'fotos'>[] = [
 	{
 		slug: 'fabio',
 		titulo: 'Fábio',
-		categoria: 'residencial',
+		categorias: ['residencial'],
 		specs: ['12 placas', '3 microinversores'],
 		avaliacao: 'Produto excelente! Manutenção, acompanhamento, qualidade das placas e nos inversores. 100% confiável.',
 	},
-	{ slug: 'gerson', titulo: 'Gerson', categoria: 'residencial', specs: ['10 placas', '3 microinversores'] },
+	{ slug: 'gerson', titulo: 'Gerson', categorias: ['residencial'], specs: ['10 placas', '3 microinversores'] },
 ];
 
 export const projetos: Projeto[] = dados.map((p) => ({ ...p, fotos: fotosDe(p.slug) })).filter((p) => p.fotos.length > 0);
@@ -149,5 +160,5 @@ export const categorias = [
 	{ id: 'comercial', rotulo: 'Comercial' },
 ].map((c) => ({
 	...c,
-	total: c.id === 'todos' ? projetos.length : projetos.filter((p) => p.categoria === c.id).length,
+	total: c.id === 'todos' ? projetos.length : projetos.filter((p) => p.categorias.includes(c.id as Categoria)).length,
 }));

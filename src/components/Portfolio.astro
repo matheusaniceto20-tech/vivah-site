@@ -42,7 +42,7 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 		<ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 			{
 				cards.map((p, i) => (
-					<li data-categoria={p.categoria} data-reveal style={`--reveal-delay:${(i % 3) * 100}ms`}>
+					<li data-categorias={p.categorias.join(' ')} data-reveal style={`--reveal-delay:${(i % 3) * 100}ms`}>
 						<article class="group relative h-full flex flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-black/5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
 							<div class="relative aspect-[4/3] overflow-hidden">
 								<Image
@@ -53,7 +53,7 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 									class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
 								/>
 								<span class="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-vivah-green">
-									{rotuloCategoria[p.categoria]}
+									{p.categorias.map((c) => rotuloCategoria[c]).join(' + ')}
 								</span>
 								<span class="absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-full bg-vivah-green/85 px-3 py-1 text-xs font-semibold text-white [&>svg]:h-4 [&>svg]:w-4">
 									<Fragment set:html={Images} />
@@ -182,13 +182,14 @@ cards.sort((a, b) => Number(!!b.avaliacao) - Number(!!a.avaliacao));
 
 	// filtro por categoria
 	const filtros = secao?.querySelectorAll<HTMLButtonElement>('[data-filtro]') ?? [];
-	const itens = secao?.querySelectorAll<HTMLElement>('li[data-categoria]') ?? [];
+	const itens = secao?.querySelectorAll<HTMLElement>('li[data-categorias]') ?? [];
 	filtros.forEach((botao) =>
 		botao.addEventListener('click', () => {
 			filtros.forEach((b) => b.setAttribute('aria-selected', String(b === botao)));
 			const filtro = botao.dataset.filtro;
 			itens.forEach((item) => {
-				item.hidden = filtro !== 'todos' && item.dataset.categoria !== filtro;
+				const categorias = (item.dataset.categorias ?? '').split(' ');
+				item.hidden = filtro !== 'todos' && !categorias.includes(filtro ?? '');
 				item.classList.add('revealed');
 			});
 		})
