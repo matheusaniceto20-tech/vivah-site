@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Tractor, Droplets, BatteryCharging, MapPin, ChevronDown } from 'lucide-static';
+import { linkWhatsApp, negocio } from '../lib/negocio';
+import FaqSchema from '../components/FaqSchema.astro';
+
+const beneficios = [
+	{
+		icone: MapPin,
+		titulo: 'Independência da rede',
+		texto: 'Pra propriedades sem rede elétrica confiável ou fora do alcance da Energisa, o sistema off-grid resolve.',
+	},
+	{
+		icone: Droplets,
+		titulo: 'Energia pra irrigação e bombeamento',
+		texto: 'Reduz o custo de operar bomba d’água, pivô de irrigação e outros equipamentos que mais pesam na conta rural.',
+	},
+	{
+		icone: BatteryCharging,
+		titulo: 'Com ou sem bateria',
+		texto: 'Sistema conectado à rede (quando disponível) ou totalmente autônomo com armazenamento, dependendo do seu caso.',
+	},
+	{
+		icone: Tractor,
+		titulo: 'Equipe capacitada em off-grid',
+		texto: 'Projeto dimensionado pra cobrir o consumo real da propriedade, sem depender da distribuidora.',
+	},
+];
+
+const faq = [
+	{
+		p: 'Funciona mesmo sem rede elétrica por perto?',
+		r: 'Funciona — é o chamado sistema off-grid, dimensionado pra cobrir todo o consumo da propriedade sem depender da distribuidora. É mais robusto que um sistema conectado à rede, porque precisa armazenar energia suficiente pra cobrir os dias sem sol forte também.',
+	},
+	{
+		p: 'Serve pra bombear água de poço ou fazer irrigação?',
+		r: 'Serve. É um dos usos mais comuns em propriedade rural — energia solar pra bomba d’água, pivô de irrigação e outros equipamentos que normalmente rodam no diesel ou numa ligação cara e distante da rede.',
+	},
+	{
+		p: 'Preciso ter rede elétrica chegando na propriedade?',
+		r: 'Não necessariamente. Se não tiver rede confiável por perto, o sistema off-grid resolve sozinho. Se tiver rede, também dá pra combinar geração solar com a rede existente.',
+	},
+	{
+		p: 'E se eu quiser energia mesmo à noite ou em dia nublado?',
+		r: 'Isso entra no dimensionamento do banco de baterias — calculamos o consumo que precisa ficar coberto mesmo sem sol, e dimensionamos a bateria pra isso. Mais detalhes no artigo sobre sistemas híbridos e BESS.',
+	},
+	{
+		p: 'Qual a área de atendimento pra propriedade rural?',
+		r: `Atendemos ${negocio.raioAtendimento}, incluindo propriedades rurais fora da zona urbana de Palmas.`,
+	},
+];
+---
+
+<Layout
+	title="Energia Solar Rural em Tocantins"
+	description="Energia solar pra propriedade rural em Tocantins: irrigação, bombeamento de água e autonomia total em áreas sem rede elétrica confiável."
+	heroHeader
+>
+	<section class="relative overflow-hidden bg-vivah-green py-28 md:py-36 text-white">
+		<img src="/brand/logo-vivah-icone.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-32 -top-32 w-96 opacity-10 spin-slow" />
+		<div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+			<span class="eyebrow !bg-white/10 !text-vivah-yellow">Rural</span>
+			<h1 class="font-display font-extrabold text-4xl md:text-6xl leading-tight">
+				Energia solar <span class="text-vivah-yellow">na propriedade rural</span>
+			</h1>
+			<p class="mt-5 text-lg text-white/85 max-w-2xl">
+				Com ou sem rede elétrica por perto: dimensionamos o sistema certo pra cobrir irrigação, bombeamento de
+				água e o consumo geral da propriedade, com autonomia real quando a distribuidora não chega.
+			</p>
+			<a href={linkWhatsApp('Quero um orçamento de energia solar para minha propriedade rural.')} target="_blank" rel="noopener noreferrer" class="btn btn-amarelo mt-8">
+				Falar sobre meu projeto rural
+			</a>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-white fundo-aurora">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow">Vantagens</span>
+				<h2 class="titulo-secao">Por que faz sentido <span class="marker">no campo</span></h2>
+			</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{
+					beneficios.map((b, i) => (
+						<div class="rounded-3xl bg-vivah-mist/70 p-7 hover:bg-white hover:shadow-xl hover:ring-1 hover:ring-vivah-yellow hover:-translate-y-1 transition duration-300" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+							<span class="icone-vivo flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={b.icone} />
+							<h3 class="font-display font-bold text-lg mt-5 mb-1.5">{b.titulo}</h3>
+							<p class="text-sm text-vivah-muted">{b.texto}</p>
+						</div>
+					))
+				}
+			</div>
+			<p class="mt-8 text-center text-sm text-vivah-muted max-w-2xl mx-auto">
+				Quer entender melhor como funciona um sistema sem depender da rede? Veja o artigo sobre
+				<a href="/hibridos" class="font-semibold text-vivah-green-700 underline underline-offset-2"> sistemas híbridos e BESS</a>.
+			</p>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-vivah-mist">
+		<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+			<h2 class="titulo-secao text-center mb-12">Perguntas sobre energia solar rural</h2>
+			<div class="space-y-3">
+				{
+					faq.map((item) => (
+						<details class="group rounded-2xl bg-white p-5 ring-1 ring-transparent open:ring-vivah-yellow open:shadow-lg transition">
+							<summary class="flex items-center justify-between gap-4 cursor-pointer font-semibold list-none">
+								{item.p}
+								<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-vivah-yellow text-vivah-green [&>svg]:h-4 [&>svg]:w-4 group-open:rotate-180 transition-transform" set:html={ChevronDown} />
+							</summary>
+							<p class="mt-3 text-sm text-vivah-muted">{item.r}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-vivah-yellow py-16 text-center">
+		<h2 class="font-display font-extrabold text-3xl md:text-4xl text-vivah-green">Quer energia na sua propriedade rural?</h2>
+		<a href={linkWhatsApp('Quero um orçamento de energia solar para minha propriedade rural.')} target="_blank" rel="noopener noreferrer" class="btn btn-verde mt-6">
+			Falar com a Vivah
+		</a>
+	</section>
+
+	<FaqSchema faq={faq} />
+</Layout>

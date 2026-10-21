@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Users, Wallet, FileCheck, Zap, ChevronDown } from 'lucide-static';
+import { linkWhatsApp } from '../lib/negocio';
+import FaqSchema from '../components/FaqSchema.astro';
+
+const beneficios = [
+	{
+		icone: Wallet,
+		titulo: 'Reduz o rateio de condomínio',
+		texto: 'Energia das áreas comuns — elevador, iluminação, bombas, portão — é uma das despesas que mais pesa na taxa condominial.',
+	},
+	{
+		icone: Users,
+		titulo: 'Benefício pra todos os moradores',
+		texto: 'A economia entra direto na taxa de condomínio, sem precisar que cada morador instale individualmente.',
+	},
+	{
+		icone: FileCheck,
+		titulo: 'Projeto pra apresentar em assembleia',
+		texto: 'Preparamos a proposta técnica e financeira pronta pra ser votada, com retorno estimado pro condomínio.',
+	},
+	{
+		icone: Zap,
+		titulo: 'Dimensionado pro consumo comum',
+		texto: 'O sistema é calculado pelo consumo das áreas comuns — não tem relação com o consumo individual de cada unidade.',
+	},
+];
+
+const faq = [
+	{
+		p: 'Precisa de aprovação em assembleia?',
+		r: 'Sim, por ser uma mudança na área comum, normalmente passa por aprovação em assembleia — como qualquer obra ou investimento do condomínio. A gente prepara a proposta técnica e financeira pronta pra apresentar aos moradores.',
+	},
+	{
+		p: 'O sistema atende cada apartamento individualmente?',
+		r: 'Não — esse projeto é dimensionado pro consumo das áreas comuns (elevador, iluminação, bombas, portão eletrônico), não pra reduzir a conta de luz de cada unidade. Instalação individual por apartamento é outro tipo de projeto, que avaliamos separadamente dependendo do espaço e autorização.',
+	},
+	{
+		p: 'Onde os painéis ficam instalados?',
+		r: 'Depende da estrutura do prédio — pode ser no telhado, na cobertura, ou em alguma área comum com boa incidência de sol. A visita técnica avalia as opções disponíveis no seu condomínio.',
+	},
+	{
+		p: 'Quanto tempo leva pra se pagar?',
+		r: 'Varia com o consumo das áreas comuns e o tamanho do sistema, mas segue a mesma lógica de qualquer projeto de energia solar: payback em poucos anos, seguido de economia líquida na taxa condominial por décadas.',
+	},
+	{
+		p: 'Quem cuida da manutenção depois?',
+		r: 'A manutenção fica a cargo da administração do condomínio, com suporte da Vivah — é um ponto que já deixamos combinado desde o início do projeto.',
+	},
+];
+---
+
+<Layout
+	title="Energia Solar para Condomínios em Palmas"
+	description="Energia solar para áreas comuns de condomínios em Palmas: reduz a taxa condominial gerando a energia de elevador, iluminação, bombas e portão."
+	heroHeader
+>
+	<section class="relative overflow-hidden bg-vivah-green py-28 md:py-36 text-white">
+		<img src="/brand/logo-vivah-icone.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-32 -top-32 w-96 opacity-10 spin-slow" />
+		<div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+			<span class="eyebrow !bg-white/10 !text-vivah-yellow">Condomínios</span>
+			<h1 class="font-display font-extrabold text-4xl md:text-6xl leading-tight">
+				Energia solar <span class="text-vivah-yellow">nas áreas comuns</span>
+			</h1>
+			<p class="mt-5 text-lg text-white/85 max-w-2xl">
+				Elevador, iluminação, bombas e portão eletrônico custam energia todo mês — gerar essa energia reduz a
+				taxa condominial pra todos os moradores, não só pra quem instala individualmente.
+			</p>
+			<a href={linkWhatsApp('Quero um orçamento de energia solar para as áreas comuns do meu condomínio.')} target="_blank" rel="noopener noreferrer" class="btn btn-amarelo mt-8">
+				Pedir proposta pro condomínio
+			</a>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-white fundo-aurora">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow">Vantagens</span>
+				<h2 class="titulo-secao">Por que faz sentido <span class="marker">pro condomínio</span></h2>
+			</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{
+					beneficios.map((b, i) => (
+						<div class="rounded-3xl bg-vivah-mist/70 p-7 hover:bg-white hover:shadow-xl hover:ring-1 hover:ring-vivah-yellow hover:-translate-y-1 transition duration-300" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+							<span class="icone-vivo flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={b.icone} />
+							<h3 class="font-display font-bold text-lg mt-5 mb-1.5">{b.titulo}</h3>
+							<p class="text-sm text-vivah-muted">{b.texto}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-vivah-mist">
+		<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+			<h2 class="titulo-secao text-center mb-12">Perguntas sobre energia solar em condomínio</h2>
+			<div class="space-y-3">
+				{
+					faq.map((item) => (
+						<details class="group rounded-2xl bg-white p-5 ring-1 ring-transparent open:ring-vivah-yellow open:shadow-lg transition">
+							<summary class="flex items-center justify-between gap-4 cursor-pointer font-semibold list-none">
+								{item.p}
+								<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-vivah-yellow text-vivah-green [&>svg]:h-4 [&>svg]:w-4 group-open:rotate-180 transition-transform" set:html={ChevronDown} />
+							</summary>
+							<p class="mt-3 text-sm text-vivah-muted">{item.r}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-vivah-yellow py-16 text-center">
+		<h2 class="font-display font-extrabold text-3xl md:text-4xl text-vivah-green">Quer reduzir a taxa condominial?</h2>
+		<a href={linkWhatsApp('Quero um orçamento de energia solar para as áreas comuns do meu condomínio.')} target="_blank" rel="noopener noreferrer" class="btn btn-verde mt-6">
+			Pedir proposta pro condomínio
+		</a>
+	</section>
+
+	<FaqSchema faq={faq} />
+</Layout>

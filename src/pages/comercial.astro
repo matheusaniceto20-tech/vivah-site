@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { Building2, TrendingDown, Factory, Zap, ChevronDown } from 'lucide-static';
+import { linkWhatsApp } from '../lib/negocio';
+import { projetos } from '../data/projetos';
+import FaqSchema from '../components/FaqSchema.astro';
+
+const comerciais = projetos
+	.filter((p) => p.categorias.includes('comercial') || p.categorias.includes('grande-porte'))
+	.slice(0, 6);
+
+const beneficios = [
+	{
+		icone: TrendingDown,
+		titulo: 'Reduz custo operacional',
+		texto: 'Energia solar entra como despesa fixa menor, liberando caixa pra outras partes do negócio.',
+	},
+	{
+		icone: Building2,
+		titulo: 'Do pequeno comércio ao galpão',
+		texto: 'Projetos de qualquer porte — loja, barbearia, pousada, indústria — com estrutura própria de fabricação.',
+	},
+	{
+		icone: Factory,
+		titulo: 'Telhado alto não é problema',
+		texto: 'Elevador próprio alcança telhados e galpões de até 10 metros com segurança.',
+	},
+	{
+		icone: Zap,
+		titulo: 'Projeto elétrico completo',
+		texto: 'Um dos sócios é eletrotécnico — projeto elétrico e dimensionamento feitos pela própria equipe.',
+	},
+];
+
+const faq = [
+	{
+		p: 'Minha empresa precisa parar de funcionar durante a instalação?',
+		r: 'Não. A instalação é feita sem interromper a operação do negócio — só a homologação final com a Energisa exige uma breve interrupção pontual, agendada com antecedência.',
+	},
+	{
+		p: 'Funciona pra comércio pequeno também?',
+		r: 'Sim. Já instalamos em barbearia, pousada e comércios de porte pequeno e médio — o dimensionamento é feito pro consumo real do seu negócio.',
+	},
+	{
+		p: 'E se minha empresa for Grupo A (alta tensão)?',
+		r: 'Pra esse perfil, o ponto que mais pesa na conta costuma ser o horário de consumo, não só o total — vale conhecer a solução de controle de demanda com BESS.',
+	},
+	{
+		p: 'Tenho estacionamento — dá pra cobrir com painel solar?',
+		r: 'Dá, e é uma das soluções mais usadas em comércios: o carport protege os veículos e gera energia ao mesmo tempo, sem precisar de área extra.',
+	},
+	{
+		p: 'Como entra no financeiro da empresa?',
+		r: 'Como investimento com retorno previsível — a maioria dos projetos comerciais se paga em poucos anos e depois vira economia líquida por décadas.',
+	},
+];
+---
+
+<Layout
+	title="Energia Solar para Empresas e Comércio em Palmas"
+	description="Energia solar comercial em Palmas e região: do pequeno comércio ao galpão industrial, com estrutura própria, projeto elétrico completo e elevador pra telhados altos."
+	heroHeader
+>
+	<section class="relative overflow-hidden bg-vivah-green py-28 md:py-36 text-white">
+		<img src="/brand/logo-vivah-icone.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-32 -top-32 w-96 opacity-10 spin-slow" />
+		<div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+			<span class="eyebrow !bg-white/10 !text-vivah-yellow">Empresas e comércio</span>
+			<h1 class="font-display font-extrabold text-4xl md:text-6xl leading-tight">
+				Energia solar <span class="text-vivah-yellow">pro seu negócio</span>
+			</h1>
+			<p class="mt-5 text-lg text-white/85 max-w-2xl">
+				Do pequeno comércio ao galpão industrial — projeto elétrico completo, estrutura de fabricação própria
+				e elevador pra telhados altos, tudo com a mesma equipe do início ao fim.
+			</p>
+			<div class="mt-8 flex flex-col sm:flex-row gap-4">
+				<a href={linkWhatsApp('Quero um orçamento de energia solar para minha empresa.')} target="_blank" rel="noopener noreferrer" class="btn btn-amarelo">
+					Pedir orçamento
+				</a>
+				<a href="/bess" class="btn btn-claro">Sou Grupo A, quero saber sobre BESS</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 md:py-28 bg-white fundo-aurora">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+				<span class="eyebrow">Vantagens</span>
+				<h2 class="titulo-secao">Por que instalar <span class="marker">na empresa</span></h2>
+			</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				{
+					beneficios.map((b, i) => (
+						<div class="rounded-3xl bg-vivah-mist/70 p-7 hover:bg-white hover:shadow-xl hover:ring-1 hover:ring-vivah-yellow hover:-translate-y-1 transition duration-300" data-reveal style={`--reveal-delay:${i * 100}ms`}>
+							<span class="icone-vivo flex h-14 w-14 items-center justify-center rounded-2xl bg-vivah-yellow text-vivah-green [&>svg]:h-7 [&>svg]:w-7" set:html={b.icone} />
+							<h3 class="font-display font-bold text-lg mt-5 mb-1.5">{b.titulo}</h3>
+							<p class="text-sm text-vivah-muted">{b.texto}</p>
+						</div>
+					))
+				}
+			</div>
+			<p class="mt-8 text-center text-sm text-vivah-muted max-w-2xl mx-auto">
+				Empresa com estacionamento próprio? Veja a página de <a href="/carport" class="font-semibold text-vivah-green-700 underline underline-offset-2">carport solar</a>.
+			</p>
+		</div>
+	</section>
+
+	{
+		comerciais.length > 0 && (
+			<section id="projetos-comercial" class="py-20 md:py-28 bg-vivah-mist scroll-mt-20">
+				<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+					<div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
+						<span class="eyebrow">Projetos</span>
+						<h2 class="titulo-secao">Empresas que a <span class="marker">Vivah</span> já atendeu</h2>
+					</div>
+					<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+						{comerciais.map((p) => (
+							<div class="rounded-3xl overflow-hidden bg-white ring-1 ring-black/5" data-reveal>
+								<Image src={p.fotos[0]} alt={`Instalação comercial — ${p.titulo}`} widths={[400, 700]} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" class="w-full aspect-[4/3] object-cover" />
+								<div class="p-5">
+									<h3 class="font-display font-bold text-lg">{p.titulo}</h3>
+									{(p.local || p.specs.length > 0) && <p class="text-sm text-vivah-muted">{p.local ?? p.specs.join(' · ')}</p>}
+								</div>
+							</div>
+						))}
+					</div>
+					<div class="text-center mt-10">
+						<a href="/#projetos" class="font-semibold text-vivah-green-700 hover:underline">Ver todos os projetos →</a>
+					</div>
+				</div>
+			</section>
+		)
+	}
+
+	<section class="py-20 md:py-28 bg-white">
+		<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+			<h2 class="titulo-secao text-center mb-12">Perguntas sobre energia solar comercial</h2>
+			<div class="space-y-3">
+				{
+					faq.map((item) => (
+						<details class="group rounded-2xl bg-vivah-mist p-5 ring-1 ring-transparent open:bg-white open:ring-vivah-yellow open:shadow-lg transition">
+							<summary class="flex items-center justify-between gap-4 cursor-pointer font-semibold list-none">
+								{item.p}
+								<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-vivah-yellow text-vivah-green [&>svg]:h-4 [&>svg]:w-4 group-open:rotate-180 transition-transform" set:html={ChevronDown} />
+							</summary>
+							<p class="mt-3 text-sm text-vivah-muted">{item.r}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-vivah-yellow py-16 text-center">
+		<h2 class="font-display font-extrabold text-3xl md:text-4xl text-vivah-green">Quer reduzir o custo de energia da sua empresa?</h2>
+		<a href={linkWhatsApp('Quero um orçamento de energia solar para minha empresa.')} target="_blank" rel="noopener noreferrer" class="btn btn-verde mt-6">
+			Pedir orçamento
+		</a>
+	</section>
+
+	<FaqSchema faq={faq} />
+</Layout>
