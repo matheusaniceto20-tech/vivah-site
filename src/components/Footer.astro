@@ -32,15 +32,25 @@ const navegacao = [
 				Energia solar e elétrica em {negocio.cidade}, com usina própria de geração e atendimento em
 				{negocio.raioAtendimento}.
 			</p>
-			<a
-				href={negocio.googlePerfilUrl}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="mt-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm hover:bg-white/15 transition"
-			>
-				<span class="text-vivah-yellow" aria-hidden="true">★★★★★</span>
-				{negocio.notaGoogle.toFixed(1).replace('.', ',')} no Google
-			</a>
+			<div class="mt-5 flex flex-wrap gap-3">
+				<a
+					href={negocio.googlePerfilUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm hover:bg-white/15 transition"
+				>
+					<span class="text-vivah-yellow" aria-hidden="true">★★★★★</span>
+					{negocio.notaGoogle.toFixed(1).replace('.', ',')} no Google
+				</a>
+				<a
+					href={negocio.reclameAquiUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm hover:bg-white/15 transition"
+				>
+					Perfil no Reclame Aqui
+				</a>
+			</div>
 		</div>
 
 		<div>

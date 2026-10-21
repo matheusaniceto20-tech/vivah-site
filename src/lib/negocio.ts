@@ -18,6 +18,7 @@ export const negocio = {
 	/** só pro schema.org (AggregateRating exige um número) — não exibir contagem na UI. Atualizar de vez em quando pra bater com o perfil real. */
 	avaliacoesGoogleSchema: 17,
 	googlePerfilUrl: 'https://www.google.com/maps?cid=9400688741611047832',
+	reclameAquiUrl: 'https://www.reclameaqui.com.br/empresa/vivah-solucoes-em-energia-fotovoltaica-ltda/',
 	localizacao: { lat: -10.2483985, lng: -48.3398451 },
 } as const;
 
