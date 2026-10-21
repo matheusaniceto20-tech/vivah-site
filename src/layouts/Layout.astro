@@ -26,6 +26,17 @@ const siteTitle = title.includes('Vivah') ? title : `${title} · Vivah Energia S
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+		<!-- Google tag (gtag.js) -->
+		<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-8DKYGMZMTR"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', 'G-8DKYGMZMTR');
+		</script>
+
 		<script is:inline>
 			document.documentElement.classList.add('js');
 			// se o script de efeitos não carregar, mostra o conteúdo mesmo assim
