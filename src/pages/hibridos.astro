@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { BatteryCharging, Zap, ShieldCheck, Gauge, House, Building2, Tractor, Check, X, ChevronDown } from 'lucide-static';
 import { linkWhatsApp } from '../lib/negocio';
+import FaqSchema from '../components/FaqSchema.astro';
 
 const segmentos = [
 	{ icone: House, titulo: 'Residencial', texto: 'Backup pra não ficar sem energia em quedas de luz, com o conforto de casa.' },
@@ -200,4 +201,6 @@ const faq = [
 			Falar com a Vivah
 		</a>
 	</section>
+
+	<FaqSchema faq={faq} />
 </Layout>

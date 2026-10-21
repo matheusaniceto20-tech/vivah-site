@@ -1,0 +1,24 @@
+---
+// Dados estruturados FAQPage (schema.org) — espera o mesmo array `faq` ({ p, r })
+// já usado pra renderizar o acordeão visível na página. Só inclua esse componente
+// em páginas que têm uma seção de FAQ visível com o mesmo conteúdo.
+interface Props {
+	faq: { p: string; r: string }[];
+}
+const { faq } = Astro.props;
+
+const schema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faq.map((item) => ({
+		'@type': 'Question',
+		name: item.p,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: item.r,
+		},
+	})),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -8,6 +8,7 @@ import carportPoster from '../assets/brand/carport-poster.jpg';
 import carregador1 from '../assets/projetos/naval-carregador/01.jpg';
 import carregador2 from '../assets/projetos/naval-carregador/02.jpg';
 import Emenda from '../components/Emenda.astro';
+import FaqSchema from '../components/FaqSchema.astro';
 
 const carports = projetos.filter((p) => p.categoria === 'carport');
 
@@ -279,4 +280,6 @@ const beneficiosWallbox = [
 			Pedir orçamento
 		</a>
 	</section>
+
+	<FaqSchema faq={faq} />
 </Layout>

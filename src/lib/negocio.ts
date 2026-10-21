@@ -15,6 +15,8 @@ export const negocio = {
 	cidade: 'Palmas - TO',
 	raioAtendimento: 'até 300km de Palmas',
 	notaGoogle: 5.0,
+	/** só pro schema.org (AggregateRating exige um número) — não exibir contagem na UI. Atualizar de vez em quando pra bater com o perfil real. */
+	avaliacoesGoogleSchema: 17,
 	googlePerfilUrl: 'https://www.google.com/maps?cid=9400688741611047832',
 	localizacao: { lat: -10.2483985, lng: -48.3398451 },
 } as const;

@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Clock, AlertTriangle, TrendingUp, Wallet, Zap, Gauge, ShieldCheck, Building2, Container, Check, ChevronDown } from 'lucide-static';
 import { linkWhatsApp } from '../lib/negocio';
 import Emenda from '../components/Emenda.astro';
+import FaqSchema from '../components/FaqSchema.astro';
 
 const problemas = [
 	{ icone: Clock, titulo: 'Horário de ponta', texto: 'Energia consumida entre 17h30 e 20h30 pode custar até 5x mais que no resto do dia.' },
@@ -242,4 +243,6 @@ const faq = [
 			Pedir análise de viabilidade
 		</a>
 	</section>
+
+	<FaqSchema faq={faq} />
 </Layout>
