@@ -84,8 +84,8 @@ const dados: Omit<Projeto, 'fotos'>[] = [
 	{
 		slug: 'frederico',
 		titulo: 'Frederico',
-		categorias: ['residencial'],
-		specs: [],
+		categorias: ['residencial', 'carport'],
+		specs: ['Garagem solar'],
 		video: '/videos/portfolio/frederico.mp4',
 	},
 	{ slug: 'marcos', titulo: 'Marcos', categorias: ['carport'], specs: ['Garagem coberta com placas'] },
