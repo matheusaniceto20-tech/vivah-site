@@ -8,7 +8,7 @@ keywords:
   - parcela energia solar
   - vale a pena financiar energia solar
   - crédito energia solar
-draft: true
+draft: false
 ---
 
 Um dos motivos que mais atrasa a decisão de instalar energia solar é achar
