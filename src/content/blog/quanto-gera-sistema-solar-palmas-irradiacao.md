@@ -8,7 +8,7 @@ keywords:
   - quanto gera energia solar tocantins
   - geração sistema solar palmas
   - energia solar tocantins
-draft: true
+draft: false
 ---
 
 "Em Palmas faz tanto sol, meu sistema deve gerar muito mais que em outros
