@@ -8,7 +8,7 @@ keywords:
   - sistema solar funciona na queda de energia
   - on-grid híbrido bateria
   - energia solar apagão
-draft: true
+draft: false
 ---
 
 Essa é uma das perguntas mais comuns — e a resposta surpreende quem nunca
