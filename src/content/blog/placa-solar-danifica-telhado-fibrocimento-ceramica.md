@@ -8,7 +8,7 @@ keywords:
   - instalar energia solar telhado fibrocimento
   - instalar energia solar telhado cerâmico
   - energia solar telhado
-draft: true
+draft: false
 ---
 
 É uma das objeções mais comuns antes de fechar um projeto de energia
