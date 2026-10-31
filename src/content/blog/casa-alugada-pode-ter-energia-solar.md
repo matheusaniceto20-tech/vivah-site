@@ -8,7 +8,7 @@ keywords:
   - energia solar imóvel alugado
   - energia solar para inquilino
   - posso instalar energia solar casa alugada
-draft: true
+draft: false
 ---
 
 A resposta curta é sim, dá pra instalar energia solar num imóvel alugado
