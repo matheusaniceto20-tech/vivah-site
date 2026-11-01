@@ -1,14 +1,14 @@
 ---
 title: "Vida útil e garantia de painéis e inversor: o que esperar"
 description: "Painel solar e inversor têm vidas úteis e garantias diferentes. Entenda o que cada uma cobre antes de avaliar uma proposta de energia solar."
-publishedAt: 2026-11-02
+publishedAt: 2026-11-01
 author: "Vivah Energia Solar"
 keywords:
   - vida útil painel solar
   - garantia painel solar inversor
   - quanto tempo dura sistema de energia solar
   - garantia energia solar
-draft: true
+draft: false
 ---
 
 Uma dúvida comum na hora de comparar propostas de energia solar: "quanto
