@@ -1,14 +1,14 @@
 ---
 title: "Como ler sua conta de luz da Energisa pra dimensionar o sistema solar"
 description: "Veja quais informações da sua conta de energia a Energisa mostra, e por que elas definem o tamanho do sistema solar ideal pro seu consumo."
-publishedAt: 2026-11-04
+publishedAt: 2026-11-03
 author: "Vivah Energia Solar"
 keywords:
   - como ler conta de luz energisa
   - entender conta de energia elétrica
   - dimensionar sistema solar consumo
   - conta de luz energisa
-draft: true
+draft: false
 ---
 
 Quando você pede uma simulação de energia solar, a primeira coisa que
