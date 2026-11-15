@@ -1,7 +1,7 @@
 ---
 title: "Pós-venda em energia solar: o que exigir antes de contratar (e o que fazer se a sua empresa sumiu)"
 description: "Por que o pós-venda é o ponto fraco de muita empresa de energia solar, o que perguntar antes de contratar, e o que fazer se você já instalou e ficou sem suporte."
-publishedAt: 2026-11-13
+publishedAt: 2026-11-15
 author: "Vivah Energia Solar"
 keywords:
   - pós-venda energia solar
@@ -9,7 +9,7 @@ keywords:
   - empresa de energia solar sumiu
   - assistência técnica painel solar
   - garantia energia solar palmas
-draft: true
+draft: false
 ---
 
 Energia solar virou um mercado concorrido rápido demais pro tamanho da
